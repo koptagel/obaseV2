@@ -32,9 +32,11 @@
 
 <body>
 
+    <div class="logo1"><img src="../otherFiles/bounLogo.png" width="110px" height="100px"> </div>
     <div class="brand">Tornado Server</div>
     <div class="address-bar">Bogazici Universitesi</div>
-
+    <div class="logo2"> <img src="../otherFiles/obaseLogo.png" width="300px" height="100px"> </div>
+    
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -53,16 +55,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index.html">Genel Bilgiler</a>
+                        <a href="index.html">Fonksiyonlar</a>
                     </li>
                     <li>
-                        <a href="about.html">Fonksiyonlar</a>
+                        <a href="kurulum.html">Kurulum</a>
                     </li>
                     <li>
-                        <a href="blog.html">Son Guncellemeler</a>
+                        <a href="koddosyalari.html">Kod Dosyalari</a>
                     </li>
                     <li>
-                        <a href="contact.html">Yapilacaklar Listesi</a>
+                        <a href="guncellemeler.html">Son Guncellemeler</a>
                     </li>
                 </ul>
             </div>
@@ -73,64 +75,57 @@
 
     <div class="container">
 
-
+    
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Son Guncelleme: 
+                        <strong>3 Ekim 2016</strong>
+                    </h2>
+                    <hr>
+                    <ul>
+                        <li type="square"> Obase Version 2 hazirlandi.</li>
+                        <li type="square"> Server guncellendi.</li>
+                    </ul> 
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">Genel Kullanim 
+                    <h2 class="intro-text text-center">Yapilacaklar Listesi
                     </h2>
                     <hr>
-                    <center><p> localhost:8086/<strong>FonksiyonIsmi</strong>?jsonData=<strong>JsonInputu</strong> </p></center>
-                    <p> Asagida listelenen butun fonksiyonlarda veriler Json formatinda alinip, sonuclar Json formatinda geri dondurulecektir. 
-                        FonksiyonIsmi yazan yere asagida siralanan fonksiyonlardan birinin adinin yazilmasi gerekiyor. 
-                        JsonInputu yazan kisma ise verilerin Json formatinda girilmesi gerekiyor. </p>
-                    <p> Her fonksiyon icin dikkat edilmesi gerekilen noktalar ve ornek kullanimlar ilerleyen kisimlarda gosterilmistir. 
-                        Ornek kullanimlardaki Json inputlari, fonksiyonlarin calisabilmesi icin gerekli olan temel yapiyi gostermektedir. 
-                        Bu temel yapiya ek olarak baska bilgiler de ayni Json inputunun icerisinde gonderilebilir. </p>
+                    <ul>
+                        <li type="square"> similarCustomers fonksiyonu duzenlenecek (web aktiviteleri ve time slotlar eklenecek). </li>
+                        <li type="square"> customersalesMap fonksiyonuna (2,6) ve (6,2) axis degerleri icin base case eklenecek. </li>
+                        <li type="square"> customersalesMap fonksiyonuna time slot histogrami eklenecek. </li>
+                        <li type="square"> Recommendationlara count ozelligi eklenecek. </li>
+                        <li type="square"> Fonksiyon aciklamalari guncellenecek. </li>
+                    </ul> 
                 </div>
             </div>
         </div>
-
 
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center"><strong>customersOfProfile</strong>
+                    <h2 class="intro-text text-center"> Guncelleme: <strong>30 Eylul 2016</strong>
                     </h2>
                     <hr>
-                    <p> Verilen urun listesine (kullanici profiline) ve kriterlere gore, bu profile uyan musterilerin idleri ve profile olan uygunluklari listelenecektir. MinPercentage parametresi, belirli bir profil uygunluguna sahip musterilerin siralanmasini sagliyor. Count parametresi ise listelenecek maksimum musteri sayisini belirtiyor. ProfileId ve ProfileDs inputları profilin id numarasını ve ismini ifade etmek için gerekiyor. Bu id ve isim daha sonra similarCustomers fonksiyonunda kullanılacak. Musteriler, profile uygunluklarina gore siralanmistir (yuksek yuzdeden dusuk yuzdeye gore). </p>
-                    <p> <strong>Input:</strong> localhost:8086/<strong>customersOfProfile</strong>?jsonData=<strong>{"Count":5, "MinPercentage":60, "ProfileId": 11, "ProfileDs": "Bebek", "Products": [{"id": 9556}, {"id": 34398}, {"id": 5974}]}</strong> </p>
-                    <p> <strong>Output:</strong>  {"Customers": [{"percentage":98, "id": 90361}, {"percentage":80, "id": 90412}, {"percentage":77, "id": 1073258}]} </p>
-                    <p> Bu ornekte, verilen urunlere uyan, profil uygunlugu %60in uzerinde olan maksimum 5 musteri listeleniyor. Profile uyan müsterilerin bilgileri, daha sonra kullanılmak için arka planda kaydediliyor. </p>
+                    <ul>
+                        <li type="square"> Database guncellendi. </li>
+                        <li type="square"> Yeni ozellikler eklendi. </li>
+                    </ul> 
                 </div>
             </div>
         </div>
 
-
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">customerSalesMap
-                    </h2>
-                    <hr>
-                    <p> Verilen musteri idsine ve istenilen grafik kriterlerine gore, musteri haritasinin url bilgisi dondurulur. Grafik kriterlerinin alabilecegi degerler ve ifade ettikleri durumlar asagidaki tablolarda gosterilmistir. </p>
-                    <p> X ve Y Duzlemleri: </p>
-                    <p> 
-                        <center><table border="1" width=900> 
-                        <tr><td> 0 </td><td> 1 </td><td> 2 </td><td> 3 </td><td> 4 </td><td> 5 </td><td> 6 </td></tr>
-                        <tr><td> Hafta </td><td> Haftanin Gunu </td><td> Saat </td><td> Urun </td><td> Weblog Matrix </td><td> Weblog Graph </td><td> Saat Araligi </td></tr>
-                        </table></center>                    
-                    </p>
-
-                </div>
-            </div>
-        </div>
-
-
+        
 
     </div>
     <!-- /.container -->

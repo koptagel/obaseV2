@@ -35,6 +35,25 @@ hr {
     border-color: #999999;
 }
 
+.logo1 {
+    width: 110px;
+    height: 100px;
+    
+    left: 10px;
+    top: 10px;
+    z-index: 0;
+    position: absolute;
+}
+.logo2 {
+    width: 200px;
+    height: 100px;
+    
+    right: 110px;
+    top: 10px;
+    z-index: 0;
+    position: absolute;
+}
+
 .brand,
 .address-bar {
     display: none;
