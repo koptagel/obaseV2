@@ -24,7 +24,7 @@ import DatabaseInfoFunctions
 
 ### Global Variable Declarations
 HOST = 'localhost'
-PORT = 8880
+PORT = 8086
 
 DIRNAME = os.path.dirname(os.path.realpath('__file__'))
 TEMPLATE_DIRNAME = "" + DIRNAME + "/startbootstrap-business-casual-gh-pages"
