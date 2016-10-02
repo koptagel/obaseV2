@@ -2,6 +2,8 @@
 import numpy as np
 from scipy.sparse import *
 import sqlite3
+import matplotlib
+matplotlib.use("Pdf")
 import matplotlib.pyplot as plt
 
 import DatabaseInfoFunctions
