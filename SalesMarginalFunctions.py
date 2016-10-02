@@ -19,7 +19,6 @@ def getSalesMatrixOfCustomerFromMarginals(db_name, customerIndex, desiredFields,
     row = []
     col = []
     data = []
-    
     for values in cur:
         if values[0] != -1 and values[1] != -1:
             row.append(values[0])
@@ -41,9 +40,9 @@ def getSalesMatrixOfCustomerFromMarginals(db_name, customerIndex, desiredFields,
 def getCustomerSalesFromMarginals(DB_NAME, customerIndex, criteria, ax1, ax2, TimePoints, TimePointsY):
     dimensions = ["WeekIndex", "DowIndex", "HourIndex", "ItemG3Index", "WeblogMatrix", "WeblogGraph", "TimeSlots"]
     labels = ["Week", "Day Of Week", "Hour", "Item Group", "Weblog Matrix", "Weblog Graph", "Time Slots"]
-    #shapes = [81, 7, 24, 180, -1, -1, 24]
+    
     DATABASE_SHAPE = DatabaseInfoFunctions.getDatabaseShape(DB_NAME)
-    shapes = [DATABASE_SHAPE[0], DATABASE_SHAPE[1], DATABASE_SHAPE[2], DATABASE_SHAPE[3], -1, -1, DATABASE_SHAPE[3]] 
+    shapes = [DATABASE_SHAPE[0], DATABASE_SHAPE[1], DATABASE_SHAPE[2], DATABASE_SHAPE[4], -1, -1, DATABASE_SHAPE[2]] 
     
     desiredFields = [dimensions[ax1], dimensions[ax2]]
     desiredShapes = [shapes[ax1], shapes[ax2]]
@@ -121,6 +120,7 @@ def getCustomerSalesFromMarginalMats(dataDict, customerIndex, criteria, ax1,ax2,
     else:
         plotCriteria = 'binary'
     
+    # Select corresponding method according to the given axes 
     if ax1 in [0,1,2,3] and ax2 in [0,1,2,3]:
         if ax1 != ax2:   
             salesMatrix = getSalesMatrixOfCustomerFromMarginalMats(dataDict, customerIndex, plotCriteria)

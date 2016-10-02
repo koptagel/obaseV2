@@ -4,11 +4,6 @@ import OfflineFunctions
 def main():
     db_name = "database/ObaseDb.db"
     
-    # Generate Marginal Sales Tensors and Save Them Into .mat Files
-    #print("Marginal Tensors - Start")
-    #OfflineFunctions.updateAllMarginalSalesTensorMat(db_name)
-    #print("Marginal Tensors - End")
-    
     # Generate Recommendations According to ItemGroup3 Purchases
     print("Recommendations Group3 - Start")
     criteriaList = [1,2]

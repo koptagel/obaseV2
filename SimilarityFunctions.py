@@ -16,9 +16,9 @@ def getSimilarCustomers(db_name, customerIndex, criteria, ax1, ax2, TimePoints, 
     
     dimensions = ["WeekIndex", "DowIndex", "HourIndex", "ItemG3Index", "WeblogMatrix", "WeblogGraph", "TimeSlots"]
     
+    # Make arrangements for TimeSlot selection
     tempAx1 = -1
     tempAx2 = -1
-    
     if ax1 == 6 or ax2 == 6:
         tempAx1 = ax1
         tempAx2 = ax2
@@ -27,7 +27,7 @@ def getSimilarCustomers(db_name, customerIndex, criteria, ax1, ax2, TimePoints, 
             ax1 = 2
         else:
             ax2 = 2
-            
+      
     if ax1 < ax2:
         desiredFields = [dimensions[ax1], dimensions[ax2]]
     elif ax1 > ax2:
@@ -42,21 +42,23 @@ def getSimilarCustomers(db_name, customerIndex, criteria, ax1, ax2, TimePoints, 
     if tempAx2 != -1:
         ax2 = tempAx2
     
-        
+    # Load corresponding marginal tensor from .mat file 
     filename = 'database/MarginalSalesTensor_Customer%s%s.mat' % (desiredFields[0][:-5], desiredFields[1][:-5])
-    #print("filename :%s" %filename)
-    
     dataDict = sio.loadmat(filename)
     
+    # Get the sales of the given customer
     #originSales = dataDict[str(customerIndex)]
     #originSales = SalesFunctions.getCustomerSales(db_name, customerIndex, criteria, ax1, ax2, TimePoints, TimePointsY)  
     originSales = SalesMarginalFunctions.getCustomerSalesFromMarginalMats(dataDict, customerIndex, criteria, ax1, ax2, TimePoints, TimePointsY)  
-    #print("shape: %d %d" % (originSales.shape[0],originSales.shape[1]))
 
+    # Set customer index list
+    
+    # If the function uses all customers in the database
     if searchType == 0:
         DATABASE_SHAPE = DatabaseInfoFunctions.getDatabaseShape(db_name)
         numAllCustomers = DATABASE_SHAPE[5]
         customerIndexList = np.arange(numAllCustomers)
+    # If the function uses customers in specific profile 
     else:
         customerIndexList = []
 
@@ -80,16 +82,16 @@ def getSimilarCustomers(db_name, customerIndex, criteria, ax1, ax2, TimePoints, 
     else:
         metric = 'euc'
         
-    
+    # Calculate distances 
     distances = np.zeros(len(customerIndexList))
-
     for i in range(len(customerIndexList)):        
         #customerSales = SalesFunctions.getCustomerSales(db_name, int(customerIndexList[i]), criteria, ax1, ax2, TimePoints, TimePointsY)    
         #customerSales = dataDict[str(customerIndexList[i])]
         customerSales = SalesMarginalFunctions.getCustomerSalesFromMarginalMats(dataDict, customerIndexList[i], criteria, ax1, ax2, TimePoints, TimePointsY)  
    
         distances[i] = DistanceFunctions.distance(originSales.toarray(), customerSales.toarray(), metric)
-        
+      
+    # Sort distances and find percentages 
     indices = distances.argsort()
     sortedDistances = np.sort(distances)
     sortedDistances = - sortedDistances
@@ -104,6 +106,7 @@ def getSimilarCustomers(db_name, customerIndex, criteria, ax1, ax2, TimePoints, 
     minDistance = -int(np.max(sortedDistances))
     maxDistance = -int(np.min(sortedDistances))
     
+    # Generate customers data
     count = 0
     customersData = []
     for i in range(len(customerIdList)):
@@ -124,6 +127,7 @@ def getGroupRecommendations(db_name, baseCount, criteria, recommenderType,numRec
     if baseCount == 0 or baseCount > len(customersData):
         baseCount = len(customersData)
 
+    # Get product suggestions for every customer in customersData file 
     allProducts = []
     for i in range(baseCount):
         custIndex = MappingFunctions.getCustomerIndex(db_name, customersData[i]["id"])
@@ -132,9 +136,9 @@ def getGroupRecommendations(db_name, baseCount, criteria, recommenderType,numRec
         for j in range(len(recProducts)):
             allProducts.append(recProducts[j]["id"])
             
+    # Find percentages of the products
     recProducts = []
     percProducts = []
-
     for i in range(len(allProducts)):
         if allProducts[i] not in recProducts:
             recProducts.append(allProducts[i])
@@ -145,7 +149,7 @@ def getGroupRecommendations(db_name, baseCount, criteria, recommenderType,numRec
 
     sortedIndices = np.array(percProducts).argsort()[::-1]
 
-
+    # Generate products data
     productsData = []
     for i in range(len(sortedIndices)):
         data2 = {}

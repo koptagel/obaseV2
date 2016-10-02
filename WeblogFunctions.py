@@ -1,3 +1,6 @@
+
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import requests
 import numpy as np
@@ -6,6 +9,7 @@ import networkx as nx
 import scipy.io
 
 def webBrowseMatrix(customerId):
+    # Get data from StatisticCart and StatisticCatalog tables 
     url =  'http://212.57.2.68:93/api/database/StatisticCart?$select=Carttype,Cartoperationname,Productid,Name,Totalcartitemcount,Statisticdate&$filter=Customerid+eq+%d&$orderby=Statisticdate+asc' % customerId
     r = requests.get(url)
     results = r.json()
@@ -14,6 +18,7 @@ def webBrowseMatrix(customerId):
     catR = requests.get(cat_url)
     catResults = catR.json()
     
+    # Combine activities in both tables 
     data = {}
     
     for z in results:
@@ -36,7 +41,8 @@ def webBrowseMatrix(customerId):
         
         data[z['Statisticdate']] = data2
         
-     
+    
+    # Genereate transition matrix
     name2ind = {"Login": 0, "Category": 10, "Product": 11, "Logout": 9, "AddItemToCart": 1, "EnterShoppingCartPage": 2, "StartCheckout": 3,"SaveBilling": 4, "SaveShipping": 5, "SaveShippingMethod": 6, "SaveDeliveryTime": 13, "SavePaymentMethod": 7, "ConfirmOrder": 8, "RemoveAllCartItem": 14, "UpdateCartAll": 12}           
     
     distances = np.zeros((15,15))

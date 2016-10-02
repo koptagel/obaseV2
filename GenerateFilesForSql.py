@@ -1,13 +1,15 @@
 
+# Import required libraries
 import requests
 import numpy as np
 import scipy.io as sio
 from scipy.sparse import *
 
 def generateCustomerMapping(filename,outfilename,fieldnames):
+    
+    # Read CustomerIndex - CustomerId pairs from file and store them in two lists; index and data.
     index = []
     data = []
-
     with open(filename) as inFile:
         for row, entry in enumerate(inFile, 0):
             index.append(int(row))
@@ -16,7 +18,7 @@ def generateCustomerMapping(filename,outfilename,fieldnames):
     index = np.array(index)
     data = np.array(data)
             
-
+    # Write CustomerIndex - CustomerId pairs to a txt file. 
     with open(outfilename, 'w') as outFile:
         #for i in range(len(fieldnames)):
         #    outFile.write('%s\t' % fieldnames[i])
@@ -33,6 +35,7 @@ def generateItemMapping(filename,filenameDs,outfilename,fieldnames):
     itemIdG3 = []
     itemDsG3 = []
     
+    # Read ItemIndex - ItemId and ItemIndex - ItemDs pairs from files and store them in lists; index, itemId and ItemDs.
     with open(filename) as inFile:
         for row, entry in enumerate(inFile, 0):
             index.append(int(row))
@@ -45,6 +48,7 @@ def generateItemMapping(filename,filenameDs,outfilename,fieldnames):
     index = np.array(index)
     itemId = np.array(itemId)
     
+    # For each item, get UrunGrup3 information from api and store IdUrunGrup3 and DsUrunGrup3 values in lists; itemIdG3 and itemDsG3.
     num = 0
     num2 = 0
     for i in range(len(itemId)):
@@ -87,6 +91,7 @@ def generateItemMapping(filename,filenameDs,outfilename,fieldnames):
             idx = visited.index(temp)
             indexG3.append(idx)
 
+    # Write ItemIndex, ItemId, ItemG3Index, ItemG3Id, ItemG3Ds and ItemDs values into file.
     with open(outfilename, 'w', encoding='utf-8') as outFile:
         #for i in range(len(fieldnames)):
         #    outFile.write('%s\t' % fieldnames[i])
@@ -111,8 +116,9 @@ def generateSalesTensor(filename,mappingfilename,outfilename,fieldnames):
             values2 = line2.split('\t')
             itemMap.append(values2[2])    
 
-    itemMap = itemMap[1:]
+    #itemMap = itemMap[1:]
 
+    # Store sales records into corresponding lists.
     with open(filename) as inFile:
         for line in inFile:
             values = line.split('\t')
@@ -127,6 +133,7 @@ def generateSalesTensor(filename,mappingfilename,outfilename,fieldnames):
             customerIndex.append(values[4])
             amount.append(values[5])
 
+    # Write sales tensor into file. 
     with open(outfilename, 'w', encoding='utf-8') as outFile:
             #for i in range(len(fieldnames)):
             #    outFile.write('%s\t' % fieldnames[i])

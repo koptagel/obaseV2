@@ -3,12 +3,13 @@ import numpy as np
 from scipy.sparse import *
 import sqlite3
 import matplotlib
-matplotlib.use("Pdf")
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 import DatabaseInfoFunctions
 
 def getSalesMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCriteria, shapes):
+    # Marginalise Sales Tensor
     temp = ""
     for i in range(len(desiredFields)):
         temp = temp + ", %s" % desiredFields[i]
@@ -19,10 +20,10 @@ def getSalesMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCriteria
     cur = conn.cursor()
     cur.execute(sqlQuery)
 
+    # Store xAxis, yAxis and corresponding values of the sales matrix into lists; row, col and data.
     row = []
     col = []
     data = []
-    
     for values in cur:
         if values[0] != -1 and values[1] != -1:
             row.append(values[0])
@@ -45,6 +46,7 @@ def getSalesMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCriteria
 
 
 def getSalesSlotMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCriteria, shapes, TimePoints, TimePointsY):
+    # Change Time Slot axis to Hour axis. Then, marginalise Sales Tensor. 
     temp = ""
     for i in range(len(desiredFields)):
         if desiredFields[i] == "TimeSlots":
@@ -58,10 +60,10 @@ def getSalesSlotMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCrit
     cur = conn.cursor()
     cur.execute(sqlQuery)
 
+    # Store xAxis, yAxis and corresponding values of the sales matrix into lists; row, col and data.
     row = []
     col = []
     data = []
-    
     for values in cur:
         if values[0] != -1 and values[1] != -1:
             row.append(values[0])
@@ -76,6 +78,7 @@ def getSalesSlotMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCrit
     conn.close()
     
     
+    # Collapse the matrix to achieve time slots
     isChanged = False
 
     salesMatrix = salesMatrix.toarray()
@@ -103,16 +106,17 @@ def getSalesSlotMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCrit
     return csr_matrix(newMatrix)
 
 def getSalesHistogramOfCustomer(db_name, customerIndex, desiredField, plotCriteria, shape1):
+    # Marginalise Sales Tensor
     sqlQuery = "SELECT " + desiredField + ", SUM(Amount) FROM SalesTensor WHERE CustomerIndex=%d GROUP BY " %customerIndex + desiredField
     
     conn = sqlite3.connect(db_name)
     cur = conn.cursor()
     cur.execute(sqlQuery)
 
+    # Store xAxis, yAxis and corresponding values of the sales matrix into lists; row, col and data.
     row = []
     col = []
     data = []
-    
     for values in cur:
         if values[0] != -1:
             row.append(0)
@@ -138,7 +142,7 @@ def getCustomerSales(DB_NAME, customerIndex, criteria, ax1, ax2, TimePoints, Tim
     labels = ["Week", "Day Of Week", "Hour", "Item Group", "Weblog Matrix", "Weblog Graph", "Time Slots"]
     #shapes = [81, 7, 24, 180, -1, -1, 24]
     DATABASE_SHAPE = DatabaseInfoFunctions.getDatabaseShape(DB_NAME)
-    shapes = [DATABASE_SHAPE[0], DATABASE_SHAPE[1], DATABASE_SHAPE[2], DATABASE_SHAPE[3], -1, -1, DATABASE_SHAPE[3]] 
+    shapes = [DATABASE_SHAPE[0], DATABASE_SHAPE[1], DATABASE_SHAPE[2], DATABASE_SHAPE[4], -1, -1, DATABASE_SHAPE[2]] 
     
     desiredFields = [dimensions[ax1], dimensions[ax2]]
     desiredShapes = [shapes[ax1], shapes[ax2]]
@@ -149,6 +153,7 @@ def getCustomerSales(DB_NAME, customerIndex, criteria, ax1, ax2, TimePoints, Tim
     else:
         plotCriteria = 'binary'
     
+    # Based on the given axis values, 
     if ax1 in [0,1,2,3] and ax2 in [0,1,2,3]:
         if ax1 != ax2:   
             salesMatrix = getSalesMatrixOfCustomer(DB_NAME, customerIndex, desiredFields, plotCriteria, desiredShapes)

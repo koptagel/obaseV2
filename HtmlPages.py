@@ -1,18 +1,17 @@
 
 def getUpdateDetails():
     text = '<h2> Son Guncelleme </h2>'
-    text = text + '22.09.2016 17:15 <br><br>'
-    text = text + '* Obase Version 2 yazilmaya baslandi.<br><br>'
+    text = text + '02.10.2016 20:00 <br><br>'
+    text = text + '* Obase Version 2 tamamlandi.<br>'
+    text = text + '* Guncel api dokumentasyonuna localhost:8086/index.html linkiyle ulasabilirsiniz.<br><br>'
     return text
 
 def getToDoItems():
     text = '<h2> Yapilacak Isler </h2>'
-    text = text + '* Obase Version 2 fonksiyonlari tamamlanacak.<br>'
-    text = text + '* Database olusturulacak.<br>'
-    text = text + '* Fonksiyonlar yeni yapiya gore guncellenecek.<br>'
+    text = text + '* Obase Version 2 fonksiyonlarindaki eksiklikler tamamlanacak.<br>'
+    text = text + '* Recommendation fonksiyonlarina count ozelligi eklenecek.<br>'
     text = text + '* CustomerSalesMap fonksiyonunda time slot icin label araligi ve dow icin tick ayarlanacak.<br>'
-    text = text + '* CustomerSalesMap fonksiyonuna weblog matrix ve graph eklenecek.<br>'
-    text = text + '* Main Pagedeki bilgiler guncellenecek.<br><br>'
+    text = text + '* CustomerSalesMap ve similarCustomers fonksiyonlarina weblog matrix ve graph eklenecek.<br><br>'
     return text
     
 def getDatasetDetails():
@@ -167,6 +166,9 @@ def getFunctions(SERVER_IP, PORT):
 
 def getFinishedItems():
     text = '<h2> Bitirilen Isler </h2>'
+    text = text + '* 02.10.2016 Obase Version 2 yayinlandi.<br>'
+    text = text + '* 02.10.2016 Database guncellendi.<br>'
+    text = text + '* 02.10.2016 Server kurulumu tamamlandi.<br>'
     text = text + '* 22.09.2016 Database icin CustomerMapping.txt, ItemMapping.txt ve SalesTensor.txt dosyalari olusturuldu.<br>'
     text = text + '* 20.09.2016 recommendProducts2 fonksiyonu hizlandirildi.<br><br>'
     return text
