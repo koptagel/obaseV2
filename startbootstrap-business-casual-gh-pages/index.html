@@ -36,6 +36,7 @@
     <div class="brand">Tornado Server</div>
     <div class="address-bar">Bogazici Universitesi</div>
     <div class="logo2"> <img src="../otherFiles/obaseLogo.png" width="300px" height="100px"> </div>
+    
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -114,7 +115,14 @@
                     </h2>
                     <hr>
                     <p> Verilen urun listesine (kullanici profiline) ve kriterlere gore, bu profile uyan musterilerin idleri ve profile olan uygunluklari listelenecektir. MinPercentage parametresi, belirli bir profil uygunluguna sahip musterilerin siralanmasini sagliyor. Count parametresi ise listelenecek maksimum musteri sayisini belirtiyor. ProfileId ve ProfileDs inputları profilin id numarasını ve ismini ifade etmek için gerekiyor. Bu id ve isim daha sonra similarCustomers fonksiyonunda kullanılacak. Musteriler, profile uygunluklarina gore siralanmistir (yuksek yuzdeden dusuk yuzdeye gore). </p>
-                    <p> <strong>Input:</strong> localhost:8086/<strong>customersOfProfile</strong>?jsonData=<strong>{"Count":5, "MinPercentage":60, "ProfileId": 11, "ProfileDs": "Bebek", "Products": [{"id": 9556}, {"id": 34398}, {"id": 5974}]}</strong> </p>
+                    <p>Type parametresi musteri profillerinin ne baz alarak olusturulacagini belirtiyor: </p>
+                    <p> 
+                        <center><table border="1" width=900> 
+                        <tr><td> 1 </td><td> 2 </td></tr>
+                        <tr><td> Urunlere harcanan para </td><td> Urunlerin alinip alinmadigi (0 veya 1 seklinde) </td></tr>
+                        </table></center>                    
+                    </p>
+                    <p> <strong>Input:</strong> localhost:8086/<strong>customersOfProfile</strong>?jsonData=<strong>{"Count":5, "MinPercentage":60, "Type": 2 "ProfileId": 11, "ProfileDs": "Bebek", "Products": [{"id": 9556}, {"id": 34398}, {"id": 5974}]}</strong> </p>
                     <p> <strong>Output:</strong>  {"Customers": [{"percentage":98, "id": 90361}, {"percentage":80, "id": 90412}, {"percentage":77, "id": 1073258}]} </p>
                     <p> Bu ornekte, verilen urunlere uyan, profil uygunlugu %60in uzerinde olan maksimum 5 musteri listeleniyor. Profile uyan müsterilerin bilgileri, daha sonra kullanılmak için arka planda kaydediliyor. </p>
                 </div>
@@ -184,7 +192,7 @@
                     <p> searchType parametresi 1 değerini aldığında, input olarak ayrıca profilin id numarasının ve isminin verilmesi gerekiyor (customersOfProfile fonksiyonunda kullanılan).</p>
                     <p> baseCount parametresi, benzer urunlerin kac musteri temel alinarak hesaplanacagini belirtiyor. Parametre 0 degerini aldiginda, o profildeki/listedeki butun musteriler icin calisiyor. </p>
                     <p> productCount parametresi, musterilere onerilen ilk kac urunu goz onunde bulunduracagimizi belirtiyor. </p>
-                    <p> baseCount ve productCount parametrelerine verilen degerlere gore fonksiyonun calisma suresinde farkliliklar oluyor.</p>
+                    <p> recommenderType parametresi 4 farkli deger alabilir; "mix", "discover", "habit" ve "difference". </p>
                     <p> Musterilerin benzerlik yuzdesi bu formulle hesaplaniyor; percentage = 100 - (100 * distance / maxDistance)</p>
                     <p> baseCount ve productCount parametrelerine verilen degerlere gore fonksiyonun calisma suresinde farkliliklar oluyor.</p>
                     <p> <strong> Input: </strong> localhost:8086/<strong>similarCustomers</strong>?jsonData=<strong>{"id": 1279930, "xAxis":1, "yAxis": 2, "type": 2, "distanceType": 3, "Count":15, "MinPercentage":10, "productCount": 10, "baseCount": 50, "recommenderType": "mix", "searchType": 1, "ProfileId": 123, "ProfileDs": "Bebek", "slots": [{"x":0,"y":8},{"x":10,"y":20},{"x":20,"y":24}]} </strong> </p>
@@ -226,12 +234,20 @@
                     </h2>
                     <hr>
                     <p> Verilen musteri idsi, tavsiye tipi ve sayiya gore onerilen urunlerin 3. grup idleri dondurulur. </p>
+                    <p> criteria parametresinin alabilecegi degerler: </p>
+                    <p> 
+                        <center><table border="1" width=900> 
+                        <tr><td> 1 </td><td> 2 </td></tr>
+                        <tr><td> Toplam Satis Tutari  </td><td> Satis yapilip yapilmadigi (0 veya 1 seklinde) </td></tr>
+                        </table></center>                    
+                    </p>
                     <p> type parametresi oneri listesinin nasil duzenlenecegini belirtiyor. Parametrenin alabilecegi degerler ve anlamlari asagidaki gibidir. </p>
                     <p> 
                         <center><table border="1" width=900> 
                         <tr><td> mix </td><td> Hem simdiye kadar alinan hem de henuz alinmamis ama alinma ihtimali yuksek urunler listelenir </td></tr>
                         <tr><td> discover </td><td> Yalnizca henuz alinmamis ama alinma ihtimali yuksek urunler listelenir </td></tr>
                         <tr><td> habit </td><td> Yalnizca simdiye kadar alinan urunler listelenir</td></tr>
+                        <tr><td> difference </td><td> Yalnizca gercekte alinandan daha yuksek tahmin edilen urunler listelenir</td></tr>
                         </table></center>                    
                     </p>
                     <p> Musterilerin satis grafiklerinin bar chartlarini gorebilmek icin xAxis ve yAxis degerlerinin ayni sayi olmasi gerekli.</p>
@@ -254,12 +270,20 @@
                     </h2>
                     <hr>
                     <p> Verilen musteri idsi, tavsiye tipi ve sayiya gore onerilen urunlerin idleri dondurulur. </p>
+                    <p> criteria parametresinin alabilecegi degerler: </p>
+                    <p> 
+                        <center><table border="1" width=900> 
+                        <tr><td> 1 </td><td> 2 </td></tr>
+                        <tr><td> Toplam Satis Tutari  </td><td> Satis yapilip yapilmadigi (0 veya 1 seklinde) </td></tr>
+                        </table></center>                    
+                    </p>
                     <p> type parametresi oneri listesinin nasil duzenlenecegini belirtiyor. Parametrenin alabilecegi degerler ve anlamlari asagidaki gibidir. </p>
                     <p> 
                         <center><table border="1" width=900> 
                         <tr><td> mix </td><td> Hem simdiye kadar alinan hem de henuz alinmamis ama alinma ihtimali yuksek urunler listelenir </td></tr>
                         <tr><td> discover </td><td> Yalnizca henuz alinmamis ama alinma ihtimali yuksek urunler listelenir </td></tr>
                         <tr><td> habit </td><td> Yalnizca simdiye kadar alinan urunler listelenir</td></tr>
+                        <tr><td> difference </td><td> Yalnizca gercekte alinandan daha yuksek tahmin edilen urunler listelenir</td></tr>
                         </table></center>                    
                     </p>
                     <p> Musterilerin satis grafiklerinin bar chartlarini gorebilmek icin xAxis ve yAxis degerlerinin ayni sayi olmasi gerekli.</p>

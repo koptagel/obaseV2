@@ -87,6 +87,13 @@
                     <ul>
                         <li type="square"> Obase Version 2 hazirlandi.</li>
                         <li type="square"> Server guncellendi.</li>
+                        <li type="square"> Fonksiyon parametrelerinde degisiklikler yapildi.</li>
+                        <ul>
+                            <li type="square"> <strong>customersOfProfile</strong> fonksiyonuna <strong>Type</strong> parametresi eklendi. Artik musterilerin urun profiline uyumlulugu, urunleri alip almamalarina veya urunlere harcadiklari toplam tutara gore belirleniyor.</li>
+                            <li type="square"> <strong>recommendProducts</strong> ve <strong>recommendProducts2</strong> fonksiyonlarina <strong>criteria</strong> parametresi eklendi. Artik urun satis tahminleri hem urunleri alip almamalarina hem de urunlere harcadiklari toplam tutara gore belirlenebiliyor.</li>
+                            <li type="square"> <strong>recommendProducts</strong> ve <strong>recommendProducts2</strong> fonksiyonlarina bir tane daha <strong>recommenderType ("difference")</strong> eklendi. Artik urun onerisi yapilirken sadece normal satis miktarindan daha yuksek tahminde bulunulan urunler de listelenebiliyor. </li>
+                            <li type="square"> <strong>similarCustomers</strong> fonksiyonuna da <strong>recommenderType</strong> parametresi eklendi. Artik benzer musterilere urun onerisi yapilirken bu parametre goz onunde bulunduruluyor. </li>
+                        </ul> 
                     </ul> 
                 </div>
             </div>
@@ -101,10 +108,10 @@
                     <hr>
                     <ul>
                         <li type="square"> similarCustomers fonksiyonu duzenlenecek (web aktiviteleri ve time slotlar eklenecek). </li>
-                        <li type="square"> customersalesMap fonksiyonuna (2,6) ve (6,2) axis degerleri icin base case eklenecek. </li>
+                        <li type="square"> customersalesMap fonksiyonuna (2,6) ve (6,2) eksen degerleri icin base caseler eklenecek. </li>
                         <li type="square"> customersalesMap fonksiyonuna time slot histogrami eklenecek. </li>
-                        <li type="square"> Recommendationlara count ozelligi eklenecek. </li>
-                        <li type="square"> Fonksiyon aciklamalari guncellenecek. </li>
+                        <li type="square"> customersalesMap fonksiyonunda dow ve time slot eksenleri icin labellar eklenecek. </li>
+                        <li type="square"> RecommenderType'lara count ozelligi eklenecek. </li>
                     </ul> 
                 </div>
             </div>

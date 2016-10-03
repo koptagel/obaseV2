@@ -33,7 +33,6 @@ STATIC_PATH = os.path.join(DIRNAME, '.')
 DB_NAME = "database/ObaseDb.db"
 DATABASE_SHAPE = DatabaseInfoFunctions.getDatabaseShape(DB_NAME) # NUM_WEEKS, NUM_DOWS, NUM_HOURS, NUM_ITEMS, NUM_ITEMSG3, NUM_CUSTOMERS
 
-#SALES_MATRIX = SalesFunctions.getSalesMatrixWithoutG3(DB_NAME, 2, [DATABASE_SHAPE[5] ,DATABASE_SHAPE[3]])
 
 ### Classes
 
@@ -55,6 +54,7 @@ class CustomerSalesMap(tornado.web.RequestHandler):
         self.post(*args)
         
     def post(self, *args):
+        # Get the input parameters
         temp = self.get_argument('jsonData')
         inputData = json.loads(temp)
         
@@ -65,6 +65,7 @@ class CustomerSalesMap(tornado.web.RequestHandler):
         ax1 = int(inputData['xAxis'])
         ax2 = int(inputData['yAxis'])
         
+        # Check base cases
         if customerIndex == -99:
             self.write("Invalid Customer Id")
         elif criteria not in [1,2]:
@@ -76,6 +77,7 @@ class CustomerSalesMap(tornado.web.RequestHandler):
         elif ax1 == 6 and ax2 == 6:
             self.write("Invalid Axis Value. Both of the axis values cannot be 6.")
         
+        # If the given axes are web-related
         elif ax1 in [4,5] or ax2 in [4,5]:
             if ax1 != ax2:
                 self.write("Invalid Axis Value. To plot weblog activities, both axes must have same value.")
@@ -103,8 +105,8 @@ class CustomerSalesMap(tornado.web.RequestHandler):
                 imageUrl = (HOST+":%s/files/%d_webgraph.png" % (PORT,customerId))
                 info = json.dumps({"image_url": imageUrl})
                 self.write("%s" % info)
-        else:
-            
+       
+        else:  
             TimePoints = []
             TimePointsY = []
             if ax1 == 6 or ax2 == 6:
@@ -133,6 +135,7 @@ class CustomersOfProfile(tornado.web.RequestHandler):
         self.post(*args)
         
     def post(self, *args):
+        # Get the input parameters
         temp = self.get_argument('jsonData')
         inputData = json.loads(temp)
         
@@ -144,6 +147,7 @@ class CustomersOfProfile(tornado.web.RequestHandler):
         profileDs = inputData['ProfileDs']
         products = inputData['Products']
     
+        # Check base cases
         if numCustomers<1:
             self.write("Invalid count. Count must be more than 0.")
         elif minPercentage>100:
@@ -158,6 +162,8 @@ class CustomersOfProfile(tornado.web.RequestHandler):
             
             if len(productList) == 0:
                 self.write("Invalid Product List.")
+            
+            # Generate customer profile 
             else:
                 shapes = [DATABASE_SHAPE[5], DATABASE_SHAPE[4]]
                 customerData, invalidItems = ProfileFunctions.generateCustomerProfile(DB_NAME, profileId, profileDs, productList, minPercentage, numCustomers, criteria, shapes)
@@ -168,7 +174,8 @@ class CustomersOfProfile(tornado.web.RequestHandler):
                     json_data = json.dumps({"Customers": customerData})
 
                 self.write(json_data) 
-            
+    
+    
 class CustomerWeblogPlots(tornado.web.RequestHandler):
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
@@ -177,6 +184,7 @@ class CustomerWeblogPlots(tornado.web.RequestHandler):
         self.post(*args)
         
     def post(self, *args):
+        # Get the input parameters
         temp = self.get_argument('jsonData')
         inputData = json.loads(temp)
         
@@ -184,6 +192,7 @@ class CustomerWeblogPlots(tornado.web.RequestHandler):
         
         distances = WeblogFunctions.webBrowseMatrix(customerId)
         
+        # Check the base case
         if np.sum(distances) == 0:
             self.write("Invalid Customer Id. This customer does not have weblog data.")
         else:
@@ -205,6 +214,7 @@ class similarCustomers(tornado.web.RequestHandler):
         self.post(*args)
         
     def post(self, *args):
+        # Get the input parameters
         temp = self.get_argument('jsonData')
         inputData = json.loads(temp)
 
@@ -225,6 +235,7 @@ class similarCustomers(tornado.web.RequestHandler):
         baseCount = inputData['baseCount']
         recommenderType = inputData['recommenderType']
         
+        # Check base cases
         if customerIndex == -99:
             self.write("Invalid Customer Id")
         elif numCustomers<1:
@@ -261,7 +272,8 @@ class similarCustomers(tornado.web.RequestHandler):
                 profileId = inputData['ProfileId']
             else:
                 profileId = 0
-                
+            
+            # Get similar customers
             shape1 = DATABASE_SHAPE[3]
             customersData, minDistance, maxDistance, productsData = SimilarityFunctions.getSimilarCustomersWithProducts(DB_NAME,customerIndex, criteria, ax1, ax2, TimePoints, TimePointsY, searchType, distanceType, numCustomers, minPercentage, profileId, numRecItems, recommenderType, shape1, baseCount)
     
@@ -277,6 +289,7 @@ class RecommendProducts(tornado.web.RequestHandler):
         self.post(*args)
         
     def post(self, *args):
+        # Get the input parameters
         temp = self.get_argument('jsonData')
         inputData = json.loads(temp)
         
@@ -286,6 +299,7 @@ class RecommendProducts(tornado.web.RequestHandler):
         criteria = inputData['criteria']
         
         customerIndex = MappingFunctions.getCustomerIndex(DB_NAME, customerId)
+        # Check base cases
         if customerIndex == -99:
             self.write("Invalid Customer Id")
         elif recommenderType not in ["mix", "discover", "habit", "difference"]:
@@ -294,6 +308,7 @@ class RecommendProducts(tornado.web.RequestHandler):
             self.write("Invalid Criteria Value. It must be 1 (sum) or 2 (binary).")
         elif numRecItems <= 0:
             self.write("Invalid Count. Count must be bigger than 0.")
+        # Get recommendations
         else:
             shape1 = DATABASE_SHAPE[4]
             recommendedProducts = RecommendationFunctions.getRecommendationG3OfCustomer(DB_NAME, customerIndex, criteria, recommenderType, numRecItems, shape1)
@@ -310,6 +325,7 @@ class RecommendProducts2(tornado.web.RequestHandler):
         self.post(*args)
         
     def post(self, *args):
+        # Get the input parameters
         temp = self.get_argument('jsonData')
         inputData = json.loads(temp)
         
@@ -319,14 +335,16 @@ class RecommendProducts2(tornado.web.RequestHandler):
         criteria = inputData['criteria']
         
         customerIndex = MappingFunctions.getCustomerIndex(DB_NAME, customerId)
+        # Check base cases
         if customerIndex == -99:
             self.write("Invalid Customer Id")
         elif recommenderType not in ["mix", "discover", "habit", "difference"]:
             self.write("Invalid Recommender Type. Type value must be mix, discover, habit or difference.")
-        elif criteria not in [2]:
-            self.write("Invalid Criteria Value. It must be 2 (binary).")
+        elif criteria not in [1, 2]:
+            self.write("Invalid Criteria Value. It must be 1 (sum) or 2 (binary).")
         elif numRecItems <= 0:
             self.write("Invalid Count. Count must be bigger than 0.")
+        # Get the recommendations
         else:
             shape1 = DATABASE_SHAPE[3]
             recommendedProducts = RecommendationFunctions.getRecommendationOfCustomer(DB_NAME, customerIndex, criteria, recommenderType, numRecItems, shape1)
