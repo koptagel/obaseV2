@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Business Casual - Start Bootstrap Theme</title>
+    <title>Obase Tornado Server</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -120,6 +120,250 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Offline Functions
+                    </h2>
+                    <hr>
+                    <p> This file contains operations which should be done offline. The functions in this file have main features; creating marginal tensors from sales and generating recommendations for customers. </p>
+                    <p> This file also contains the codes required for setting up the server and updating the database. </p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>generateRecommendationsG3(db_name, criteria)</strong></li>
+                      Given the criteria, this function generates recommendations for customers, based of item group 3 information.
+                      <li><strong>updateSalesEstimationG3Table(db_name, criteria, salesMatrixEst)</strong></li>
+                      Updates corresponding SalesEstimationG3 table in the database. 
+                      <li><strong>updateRecommendationsG3(db_name, criteria)</strong></li>
+                      Combination of generateRecommendationsG3 and updateSalesEstimationG3Table functions.
+                      <li><strong>generateRecommendations(db_name, criteria)</strong></li>
+                      Given the criteria, this function generates recommendations for customers, based of item information.
+                      <li><strong>updateSalesEstimationTable(db_name, criteria, salesMatrixEst)</strong></li>
+                      Updates corresponding SalesEstimation table in the database.
+                      <li><strong>updateRecommendations(db_name, criteria)</strong></li>
+                      Combination of generateRecommendations and updateSalesEstimationTable functions.
+                      <li><strong>updateSalesEstimationTableWithThreshold(db_name, criteria, salesMatrixEst, threshold)</strong></li>
+                      Given a threshold value, this function updates the SalesEstimation table by removing values less than the threshold.
+                      <li><strong>updateRecommendationsWithThreshold(db_name, criteria, threshold)</strong></li>
+                      Combination of generateRecommendations and updateSalesEstimationTableWithThreshold functions.
+                      <li><strong>updateMarginalSalesTensorMat(db_name, desiredFields, desiredShapes, numCustomers)</strong></li>
+                      By using SalesTensor table in the database, this function generates the marginals of the tensor and stores them in .mat files for further use.
+                      <li><strong>updateAllMarginalSalesTensorMat(db_name)</strong></li>
+                      This function generates all required marginal tensors by using updateMarginalSalesTensorMat function.
+                    </ul>
+                    <p> There two additional methods which are not used in the latest implementation in the system:</p>
+                    <ul> 
+                      <li><strong>updateMarginalSalesTensor(db_name, desiredFields)</strong></li>
+                      This function calculates a marginal of the SalesTensor table and stores the result in a table in the database.
+                      <li><strong>updateAllMarginalSalesTensorMat(db_name)</strong></li>
+                      This function generates all required marginal tensors by using updateMarginalSalesTensor function. 
+                    </ul>
+                    <p> There are also two Python files in this file:</p>
+                    <ul> 
+                      <li><strong>OfflineFunctionsForSetUp.py</strong></li>
+                      This file is required for setting up the database in the server for the first time. <br>
+                      It contains functions to calculate recommendations for customers, generate SalesEstimation and SalesEstimationG3 tables in the database.
+                      <li><strong>OfflineFunctionsForUpdate.py</strong></li>
+                      This file is required for updating the marginal tensors and sales recommendations, if the sales records in the database are changed.
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Database Info Functions
+                    </h2>
+                    <hr>
+                    <p> This file contains the functions which represent the database information of the server.  </p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>getDatabaseShape(db_name)</strong></li>
+                      This function returns the number of weeks, day of weeks, hours, items, item group 3s and customers in the database
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Mapping Functions
+                    </h2>
+                    <hr>
+                    <p> This notebook contains the mapping-related functions. </p>
+                    <p> By mapping, we mean the relation between real id values and the index values used in the database. If there is no result, the functions will display an error message and return -99 value as the result. </p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>getCustomerIndex(db_name, customerId)</strong></li>
+                      Given the CustomerId, returns CustomerIndex value.
+                      <li><strong>getCustomerId(db_name, customerIndex)</strong></li>
+                      Given the CustomerIndex, returns CustomerId value.
+                      <li><strong>getItemIndexWithItemId(db_name, itemId)</strong></li>
+                      Given the ItemId, returns ItemIndex value.
+                      <li><strong>getItemIdWithItemIndex(db_name, itemIndex)</strong></li>
+                      Given the ItemIndex, returns ItemId value.
+                      <li><strong>getItemG3IndexWithItemId(db_name, itemId)</strong></li>
+                      Given the ItemG3Index, returns ItemIndex value.
+                      <li><strong>getItemG3IdWithItemIndex(db_name, itemIndex)</strong></li>
+                      Given the ItemIndex, returns ItemG3Id value.
+                      <li><strong>getItemG3IndexWithItemIndex(db_name, itemIndex)</strong></li>
+                      Given the ItemIndex, returns ItemG3Index value.
+                      <li><strong>getItemG3IdWithItemG3Index(db_name, itemG3Index)</strong></li>
+                      Given the ItemG3Index, returns ItemG3Id value.
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Weblog Functions
+                    </h2>
+                    <hr>
+                    <p> This notebook contains functions related to web browsing activities of customers. Web browsing actions of customers are fetched online from the api provided by Obase company. </p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>webBrowseMatrix(customerId)</strong></li>
+                      Given the customer id, this function returns the matrix which represents web browsing activites of the customer.
+                      <li><strong>webBrowseGraph(customerId, distances)</strong></li>
+                      Given the activity matrix, this function generates the graph of the actions.
+                      <li><strong>plotWeblogMatrix(customerId, distances)</strong></li>
+                      Given the activity matrix, this function plots the matrix.
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Sales Functions
+                    </h2>
+                    <hr>
+                    <p> This notebook contains functions which fetch the sales data from database and display the plots. There are also functions for getting sales estimations from database. </p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>getSalesMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCriteria, shapes)</strong></li>
+                      Given the desired axes, this function returns the sales matrix of the customer.
+                      <li><strong>getSalesSlotMatrixOfCustomer(db_name, customerIndex, desiredFields, plotCriteria, shapes, TimePoints, TimePointsY)</strong></li>
+                      Given the desired axes and time slot properties, this function returns sales matrix of the customer.
+                      <li><strong>getSalesHistogramOfCustomer(db_name, customerIndex, desiredField, plotCriteria, shape1)</strong></li>
+                      Given the desired axis, this function returns the sale histogram of the customer.
+                      <li><strong>getCustomerSales(DB_NAME, customerIndex, criteria, ax1, ax2, TimePoints, TimePointsY</strong></li>
+                      This function is the combination of getSalesMatrixOfCustomer, getSalesSlotMatrixOfCustomer and getSalesHistogramOfCustomer functions.
+                      <li><strong>getCustomerSalesMap(DB_NAME, customerIndex, plotTitle, criteria, ax1, ax2, TimePoints, TimePointsY)</strong></li>
+                      This function plots the sales of the customer according to given parameters.
+                      <li><strong>getSalesMatrix(db_name, criteria, shapes)</strong></li>
+                      This function returns marginal of sales tensor in the form of (Customers vs ItemGroup3s).
+                      <li><strong>getSalesMatrixWithoutG3(db_name, criteria, shapes)</strong></li>
+                      This function returns marginal of sales tensor in the form of (Customers vs Items).
+                      <li><strong>getSalesEstimationG3OfCustomer(db_name, customerIndex, criteria, shape1)</strong></li>
+                      This function returns sales estimation of the customer based on item group 3s.
+                      <li><strong>getSalesEstimationOfCustomer(db_name, customerIndex, criteria, shape1)</strong></li>
+                      This function returns sales estimation of the customer based on items.
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Sales Marginal Functions
+                    </h2>
+                    <hr>
+                    <p> This notebook contains functions related to marginal sales tensor tables in the database and .mat files.</p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>getSalesMatrixOfCustomerFromMarginalMats(dataDict, customerIndex, plotCriteria)</strong></li>
+                      Given the desired axes, this function returns the sales matrix of the customer using corresponding marginal tensor with .mat file extension.
+                      <li><strong>getSalesHistogramOfCustomerFromMarginalMats(dataDict, customerIndex, ax1, plotCriteria)</strong></li>
+                      Given the desired axiss, this function returns the sales histogram of the customer using corresponding marginal tensor with .mat file extension.
+                      <li><strong>getSalesSlotMatrixOfCustomerFromMarginalMats(dataDict, customerIndex, ax1, ax2, plotCriteria, TimePoints, TimePointsY)</strong></li>
+                      Given the desired axes and time slot information, this function returns the sales matrix of the customer using corresponding marginal tensor with .mat file extension.
+                      <li><strong>getCustomerSalesFromMarginalMats(dataDict, customerIndex, criteria, ax1,ax2, TimePoints, TimePointsY)</strong></li>
+                      This function is the combination of getSalesMatrixOfCustomerFromMarginalMats, getSalesHistogramOfCustomerFromMarginalMats and getSalesSlotMatrixOfCustomerFromMarginalMats functions.
+                    </ul>
+                    <p> The functions below are not used in the current implementation of server. These methods get marginal sales tensor from database tables, not from .mat files.</p>
+                    <ul>  
+                      <li><strong>getSalesMatrixOfCustomerFromMarginals(db_name, customerIndex, desiredFields, plotCriteria, shapes):</strong></li>
+                      Given the desired axes, this function returns the sales matrix of the customer using corresponding marginal tensor table in the database.
+                      <li><strong>getCustomerSalesFromMarginals(DB_NAME, customerIndex, criteria, ax1, ax2, TimePoints, TimePointsY)</strong></li>
+                      Given the desired axes, this function returns the sales of the customer using corresponding marginal tensor table in the database.
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Recommendation Functions
+                    </h2>
+                    <hr>
+                    <p> This notebook contains functions related to recommendations. The functions in this notebook gets recommendations of a specific customer from SalesEstimation or SalesEstimationG3 tables and returns the estimations. </p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>getRecommendationG3OfCustomer(db_name, customerIndex, criteria, recommenderType, numRecItems, shape1)</strong></li>
+                      Given the input data, this function returns recommendations based on item group 3 information.
+                      <li><strong>getRecommendationOfCustomer(db_name, customerIndex, criteria, recommenderType, numRecItems, shape1)</strong></li>
+                      Given the input data, this function returns recommendations based on item information.
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Profile Functions
+                    </h2>
+                    <hr>
+                    <p> This notebook contains functions related to customer profiles. There are two main functionalities of these functions; generating a customer profile and updating the corresponding tables in the database. </p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>generateCustomerProfile(db_name, profileId, profileDs, productList, minPercentage, numCustomers, criteria, shapes)</strong></li>
+                      Given the parameters, this function generates customer profile. Adds the profile into ProfileMapping table and the customers into ProfileCustomers table.
+                      <li><strong>updateProfileItems(db_name, profileId, productsData)</strong></li>
+                      updateProfileItems(db_name, profileId, productsData)
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Similarity Functions
+                    </h2>
+                    <hr>
+                    <p> This notebook contains functions related to 'similar customers' feature of the system. Basically, the functions in this file find similar customers to a specific customer and generate product recommendations for these customers.</p>
+                    <p> <strong>Functions:</strong>
+                    <ul>
+                      <li><strong>getSimilarCustomers(db_name, customerIndex, criteria, ax1, ax2, TimePoints, TimePointsY, searchType, distanceType, numCustomers, minPercentage, profileId)</strong></li>
+                      Given the parameters and the customer index, this function returns the customer lists (consist of id, percentage pairs) and the minimum & maximum distance values to the given customer.
+                      <li><strong>getGroupRecommendations(db_name, baseCount, criteria, recommenderType,numRecItems, shape1, customersData)</strong></li>
+                      Given the customer list and the choices, this function returns suggested product list.
+                      <li><strong>getSimilarCustomersWithProducts(db_name, customerIndex, criteria, ax1, ax2, TimePoints, TimePointsY, searchType, distanceType, numCustomers, minPercentage, profileId, numRecItems, recommenderType, shape1, baseCount)</strong></li>
+                      This function is the combination of getSimilarCustomers and getGroupRecommendations functions.
+                    </ul>
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- /.container -->

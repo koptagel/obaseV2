@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Business Casual - Start Bootstrap Theme</title>
+    <title>Obase Tornado Server</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -122,7 +122,7 @@
                         <tr><td> Urunlere harcanan para </td><td> Urunlerin alinip alinmadigi (0 veya 1 seklinde) </td></tr>
                         </table></center>                    
                     </p>
-                    <p> <strong>Input:</strong> localhost:8086/<strong>customersOfProfile</strong>?jsonData=<strong>{"Count":5, "MinPercentage":60, "Type": 2 "ProfileId": 11, "ProfileDs": "Bebek", "Products": [{"id": 9556}, {"id": 34398}, {"id": 5974}]}</strong> </p>
+                    <p> <strong>Input:</strong> localhost:8086/<strong>customersOfProfile</strong>?jsonData=<strong>{"Count":100, "MinPercentage":10, "Type": 2, "ProfileId": 123, "ProfileDs": "Bebek", "Products": [{"id": 9556}, {"id": 34398}, {"id": 5974}]}</strong> </p>
                     <p> <strong>Output:</strong>  {"Customers": [{"percentage":98, "id": 90361}, {"percentage":80, "id": 90412}, {"percentage":77, "id": 1073258}]} </p>
                     <p> Bu ornekte, verilen urunlere uyan, profil uygunlugu %60in uzerinde olan maksimum 5 musteri listeleniyor. Profile uyan müsterilerin bilgileri, daha sonra kullanılmak için arka planda kaydediliyor. </p>
                 </div>
@@ -195,9 +195,9 @@
                     <p> recommenderType parametresi 4 farkli deger alabilir; "mix", "discover", "habit" ve "difference". </p>
                     <p> Musterilerin benzerlik yuzdesi bu formulle hesaplaniyor; percentage = 100 - (100 * distance / maxDistance)</p>
                     <p> baseCount ve productCount parametrelerine verilen degerlere gore fonksiyonun calisma suresinde farkliliklar oluyor.</p>
-                    <p> <strong> Input: </strong> localhost:8086/<strong>similarCustomers</strong>?jsonData=<strong>{"id": 1279930, "xAxis":1, "yAxis": 2, "type": 2, "distanceType": 3, "Count":15, "MinPercentage":10, "productCount": 10, "baseCount": 50, "recommenderType": "mix", "searchType": 1, "ProfileId": 123, "ProfileDs": "Bebek", "slots": [{"x":0,"y":8},{"x":10,"y":20},{"x":20,"y":24}]} </strong> </p>
+                    <p> <strong> Input: </strong> localhost:8086/<strong>similarCustomers</strong>?jsonData=<strong>{"id": 863895, "xAxis":1, "yAxis": 2, "type": 2, "distanceType": 3, "Count":15, "MinPercentage":10, "productCount": 10, "baseCount": 50, "recommenderType": "mix", "searchType": 1, "ProfileId": 123, "ProfileDs": "Bebek", "slots": [{"x":0,"y":8},{"x":10,"y":20},{"x":20,"y":24}]} </strong> </p>
                     <p> <strong> Output: </strong> {"Customers": [{"distances": 0, "percentage": 100, "id": 1279930}, {"distances": 35, "percentage": 72, "id": 1406410}, {"distances": 42, "percentage": 66, "id": 1058305}, {"distances": 42, "percentage": 66, "id": 1366933}, {"distances": 44, "percentage": 65, "id": 91248}], "Products": [{"id": 12680, "percentage": 62}, {"id": 12667, "percentage": 48}, {"id": 20083, "percentage": 48}, {"id": 12700, "percentage": 46}, {"id": 12677, "percentage": 46}, {"id": 12719, "percentage": 44}, {"id": 12678, "percentage": 38}, {"id": 10981, "percentage": 36}, {"id": 12689, "percentage": 32}, {"id": 12668, "percentage": 27}], "MinDistance": 0, "MaxDistance": 128} </p>
-                    <p> Bu ornekte 1279930 numarali musterinin alim aliskanligina (haftalara ve saat araliklarina gore, alisveris yapip yapmadigi) en cok benzerlik gosteren, profil uygunlugu %60in uzerinde olan maksimum 5 musteri listeleniyor. Bu müşteriler, 11 numaralı Bebek profilindeki müşterilerden seçiliyor.   </p>
+                    <p> Bu ornekte 863895 numarali musterinin alim aliskanligina (haftalara ve saat araliklarina gore, alisveris yapip yapmadigi) en cok benzerlik gosteren, profil uygunlugu %60in uzerinde olan maksimum 5 musteri listeleniyor. Bu müşteriler, 11 numaralı Bebek profilindeki müşterilerden seçiliyor.   </p>
                     <p> Bu ornekte benzerlik yuzdeleri su sekilde hesaplaniyor (maxDistance=128):  </p>
                     <p> Musterinin kendisine olan uzakligi distance(1279930,1279930) = 0. percentage = 100   </p>
                     <p> 1406410 id numarali musteriye olan uzakligi distance(1279930,1406410) = 35. percentage = 100 - (100 * 35 / 128) = 72  </p>

@@ -12,10 +12,11 @@ def getRecommendationG3OfCustomer(db_name, customerIndex, criteria, recommenderT
     else:
         plotCriteria = "sum"
 
+    # Get real sales data and estimation of sales of specific customer
     salesMatrix = SalesFunctions.getSalesHistogramOfCustomer(db_name, customerIndex, "ItemG3Index", plotCriteria, shape1)
     salesMatrixEst = SalesFunctions.getSalesEstimationG3OfCustomer(db_name, customerIndex, criteria, shape1)
     
-    
+    # Sort item index values, based on the recommender type
     if recommenderType == "mix":
         recItemIndices = np.argsort(salesMatrixEst.toarray())[0,:][::-1][0:numRecItems]
     else:
@@ -47,13 +48,14 @@ def getRecommendationG3OfCustomer(db_name, customerIndex, criteria, recommenderT
             count = 0
             for i in range(len(recAllItemIndices)):
                 itemIndex = recAllItemIndices[i]
-                if salesMatrixEst[0,itemIndex] >salesMatrix[0,itemIndex]:
+                if count < numRecItems and salesMatrixEst[0,itemIndex] >salesMatrix[0,itemIndex]:
                     recItemIndices.append(recAllItemIndices[i])
                     count = count+1
                 elif count == numRecItems:
                     break;
+                
                     
-                    
+    # Find corresponding item ids and return the sales estimation
     recProductData = []
     for i in range(len(recItemIndices)):
         data2 = {}
@@ -69,10 +71,11 @@ def getRecommendationOfCustomer(db_name, customerIndex, criteria, recommenderTyp
     else:
         plotCriteria = "sum"
 
+    # Get real sales data and estimation of sales of specific customer
     salesMatrix = SalesFunctions.getSalesHistogramOfCustomer(db_name, customerIndex, "ItemIndex", plotCriteria, shape1)
     salesMatrixEst = SalesFunctions.getSalesEstimationOfCustomer(db_name, customerIndex, criteria, shape1)
     
-    
+    # Sort item index values, based on the recommender type
     if recommenderType == "mix":
         recItemIndices = np.argsort(salesMatrixEst.toarray())[0,:][::-1][0:numRecItems]
     else:
@@ -104,13 +107,13 @@ def getRecommendationOfCustomer(db_name, customerIndex, criteria, recommenderTyp
             count = 0
             for i in range(len(recAllItemIndices)):
                 itemIndex = recAllItemIndices[i]
-                if salesMatrixEst[0,itemIndex] >salesMatrix[0,itemIndex]:
+                if count < numRecItems and salesMatrixEst[0,itemIndex] >salesMatrix[0,itemIndex]:
                     recItemIndices.append(recAllItemIndices[i])
                     count = count+1
                 elif count == numRecItems:
                     break;
                     
-                    
+    # Find corresponding item ids and return the sales estimation                
     recProductData = []
     for i in range(len(recItemIndices)):
         data2 = {}
