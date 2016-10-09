@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Obase Tornado Server</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/business-casual.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="logo1"><img src="../otherFiles/bounLogo.png" width="110px" height="100px"> </div>
+    <div class="brand">Tornado Server</div>
+    <div class="address-bar">Bogazici Universitesi</div>
+    <div class="logo2"> <img src="../otherFiles/obaseLogo.png" width="300px" height="100px"> </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Business Casual</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">Fonksiyonlar</a>
+                    </li>
+                    <li>
+                        <a href="fonksiyondetaylari.html">Aciklamalar</a>
+                    </li>
+                    <li>
+                        <a href="kurulum.html">Kurulum</a>
+                    </li>
+                    <li>
+                        <a href="koddosyalari.html">Kod Dosyalari</a>
+                    </li>
+                    <li>
+                        <a href="guncellemeler.html">Son Guncellemeler</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Business Casual</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a style="font-size: 15px;" href="fonksiyondetaylari_customerSalesMap.html">customerSalesMap</a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" href="fonksiyondetaylari_recommendProducts.html">recommendProducts</a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" href="fonksiyondetaylari_customersOfProfile.html">customersOfProfile</a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" href="fonksiyondetaylari_similarCustomers.html">similarCustomers</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+
+    
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">similarCustomers
+                    </h2>
+                    <hr>
+                    <h3> 1.1. Goal</h3>
+                    <p> Given customer id, parameters which will define the customers' purchasing behaviors and parameters which will define recommendation-specific details, this function will return a list of similar customers and a list of recommended products. </p>
+                    <h3> 1.2. Function Template</h3>
+                    <p> <strong>Input</strong></p>
+                    <p> localhost:8086/similarCustomers?jsonData={"id": 863895,</p>
+                    <p> "xAxis":1, "yAxis": 2, , "slots": [{"x":0,"y":8},{"x":10,"y":20},{"x":20,"y":24}], "type": 2, </p>
+                    <p> "searchType": 1, "ProfileId": 123, "ProfileDs": "Bebek", </p>
+                    <p> "distanceType": 3, "Count":15, "MinPercentage":10, </p>
+                    <p> "productCount": 10, "baseCount": 50, "recommenderType": "mix"} </p>
+                    <p> <strong>Output</strong></p>
+                    <p> {"Customers": [{"distances": 0, "percentage": 100, "id": 1279930}, {"distances": 35, "percentage": 72, "id": 1406410}, {"distances": 42, "percentage": 66, "id": 1058305}, {"distances": 42, "percentage": 66, "id": 1366933}, {"distances": 44, "percentage": 65, "id": 91248}], </p>
+                    <p> "MinDistance": 0, "MaxDistance": 128, </p>
+                    <p> "Products": [{"id": 12680, "percentage": 62}, {"id": 12667, "percentage": 48}, {"id": 20083, "percentage": 48}, {"id": 12700, "percentage": 46}, {"id": 12677, "percentage": 46}, {"id": 12719, "percentage": 44}, {"id": 12678, "percentage": 38}, {"id": 10981, "percentage": 36}, {"id": 12689, "percentage": 32}, {"id": 12668, "percentage": 27}] } </p>
+                    <h3> 1.3. Logic</h3>
+                    <p> similarCustomers has two main functionalities; finding a list of similar customers and generating a list of recommended items for those customers. We will explain these two functionalities separately.</p>
+                    <h4> 1.3.1. Finding Similar Customers</h4>
+                    <p> In the description of customerSalesMap function, we explained axis, slot and type parameters in a detailed way. These parameters are also used in the same way in similarCustomers function. </p>
+                    <p> In Figure 1.1, we have sales records of 7 different customers (C0, .., C6) based on DowIndex. DowIndex has values from 0 to 6 which corresponds to Monday to Sunday respectively. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> CustomerIndex </td><td> DowIndex </td><td> Amount </td></tr>
+                        <tr><td> 0  </td><td> 4 </td><td> 5 </td></tr>
+                        <tr><td> 0  </td><td> 5 </td><td> 5 </td></tr>
+                        <tr><td> 0  </td><td> 6 </td><td> 8 </td></tr>
+                        <tr><td> 1  </td><td> 0 </td><td> 5 </td></tr>
+                        <tr><td> 1  </td><td> 2 </td><td> 1 </td></tr>
+                        <tr><td> 1  </td><td> 5 </td><td> 2 </td></tr>
+                        <tr><td> 1  </td><td> 6 </td><td> 2 </td></tr>
+                        <tr><td> 2  </td><td> 1 </td><td> 1 </td></tr>
+                        <tr><td> 2  </td><td> 2 </td><td> 3 </td></tr>
+                        <tr><td> 2  </td><td> 3 </td><td> 1 </td></tr>
+                        <tr><td> 3  </td><td> 2 </td><td> 2 </td></tr>
+                        <tr><td> 3  </td><td> 6 </td><td> 8 </td></tr>
+                        <tr><td> 4  </td><td> 0 </td><td> 10 </td></tr>
+                        <tr><td> 5  </td><td> 4 </td><td> 7 </td></tr>
+                        <tr><td> 5  </td><td> 5 </td><td> 6 </td></tr>
+                        <tr><td> 5  </td><td> 6 </td><td> 8 </td></tr>
+                        <tr><td> 6  </td><td> 0 </td><td> 1 </td></tr>
+                        <tr><td> 6  </td><td> 1 </td><td> 1 </td></tr>
+                        <tr><td> 6  </td><td> 4 </td><td> 2 </td></tr>
+                        <tr><td> 6  </td><td> 5 </td><td> 4 </td></tr>
+                        <tr><td> 6  </td><td> 6 </td><td> 6 </td></tr>
+                        </table>Figure 1.1. Sales of customers based on DowIndex</center>                    
+                    </p>
+                    <p> Example histograms for some customers and their matrix representations are shown below.</p>
+                    <p> <center> <img src="../otherFiles/Section3_H_0.png"> </center> </p>
+                    <p><center> Figure 1.2. Sales histogram of customer C0</center></p>
+                    <p> <center> <img src="../otherFiles/Section3_H_1.png"> </center> </p>
+                    <p><center> Figure 1.3. Sales histogram of customer C1</center></p>
+                    <p> <center> <img src="../otherFiles/Section3_H_2.png"> </center> </p>
+                    <p><center> Figure 1.4. SSales histogram of customer C2</center></p>
+                    <p> Given an origin customer, our aim is to compare sales of customers and find customers more similar to the origin customers. In this file, we will compare the sales based on only the DowIndex values. However, similarCustomers function provides comparison for matrices as well. There are four different functions to compare the difference between customer behaviours, which will explained in the following sections.</p>
+                    <p> In order to show the basic idea behind the function, we will use Euclidean Distance for finding differences of customer behaviors. Euclidean Distance has the following formula:</p>
+                    <p> <center>Euc(P,Q) = 1/2 * (P-Q) * (P-Q)</center></p>
+                    <p> where P and Q represents two different customers' purchasing behaviors.</p>
+                    <p> Assume our origin customer is C0. We can represent the sales of customer C0 as:</p>
+                    <p> <center>P = (0,0,0,0,5,5,8)</center></p>
+                    <p> For each customer, we need to compare sales.</p>
+                    <p> <strong>Customer C0</strong></p>
+                    <p> First, we will compare origin customer C0 with the first customer (which is also C0). Intuitively, we will expect this customer will be the most similar one to the origin customer.</p>
+                    <p> <center>C0 = (0,0,0,0,5,5,8)</center></p>
+                    <p> <center>C0-C0 = (0,0,0,0,0,0,0)</center></p>
+                    <p> <center>(C0-C0) * (C0-C0) = (0,0,0,0,0,0,0)</center></p>
+                    <p> <center>1/2 * (C0-C0) * (C0-C0) = (0,0,0,0,0,0,0)</center></p>
+                    <p> <center>Euc(C0,C0) = 0</center></p>
+                    <p> In the last step, we are summing all the values in the list. The distance we found is 0 (P and Q are the same customer).</p>
+                    <p> <strong>Customer C1</strong></p>
+                    <p> <center>C1 = (5,0,1,0,0,2,2)</center></p>
+                    <p> <center>C0-C1 = (-5,0,-1,0,5,3,6)</center></p>
+                    <p> <center>(C0-C1) * (C0-C1) = (25,0,1,0,25,9,36)</center></p>
+                    <p> <center>1/2 * (C0-C1) * (C0-C1) = (12.5,0,0.5,0,12.5,4.5,18)</center></p>
+                    <p> <center>Euc(C0,C1) = 48</center></p>
+                    <p> <strong>Customer C2</strong></p>
+                    <p> <center>C2 = (0,0,1,3,1,0,0)</center></p>
+                    <p> <center>C0-C2 = (0,-1,-3,-1,5,5,8)</center></p>
+                    <p> <center>(C0-C2) * (C0-C2) = (0,1,9,1,25,25,64)</center></p>
+                    <p> <center>1/2 * (C0-C2) * (C0-C2) = (0,0.5,4.5,0.5,12.5,12.5,32)</center></p>
+                    <p> <center>Euc(C0,C2) = 62.5</center></p>
+                    <p> When we calculate all the distances, we have the results shown in Figure 1.5.</p>
+                    <p> 
+                        <center><table border="1" width=200> 
+                        <tr><td> CustomerIndex </td><td> Distance </td></tr>
+                        <tr><td> 0  </td><td> 0 </td></tr>
+                        <tr><td> 1  </td><td> 48 </td></tr>
+                        <tr><td> 2  </td><td> 62.5 </td></tr>
+                        <tr><td> 3  </td><td> 27 </td></tr>
+                        <tr><td> 4  </td><td> 102 </td></tr>
+                        <tr><td> 5  </td><td> 2.5 </td></tr>
+                        <tr><td> 6  </td><td> 8 </td></tr>
+                        </table>Figure 1.5. Euclidean distances to customer C0</center>                    
+                    </p>
+                    <p>We are calculating customer similarity percentage by fixing most similar customer's similarity percentage to 100% and least customer's similarity percentage to 0%. The percentage calculating formula is:</p>
+                    <p> <center>percentage(Q) = 100 - ( 100 * Euc(P,Q) / maxDistance )</center></p>
+                    <p> When we apply this formula in our example (maxDistance=102), the percentages are as follows:</p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> CustomerIndex </td><td> Distance </td><td> Percentage </td></tr>
+                        <tr><td> 0  </td><td> 0 </td><td> 100 </td></tr>
+                        <tr><td> 1  </td><td> 48 </td><td> 53 </td></tr>
+                        <tr><td> 2  </td><td> 62.5 </td><td> 38 </td></tr>
+                        <tr><td> 3  </td><td> 27 </td><td> 73 </td></tr>
+                        <tr><td> 4  </td><td> 102 </td><td> 0 </td></tr>
+                        <tr><td> 5  </td><td> 2.5 </td><td> 97 </td></tr>
+                        <tr><td> 6  </td><td> 8 </td><td> 92 </td></tr>
+                        </table>Figure 1.6. Euclidean distances and percentages to customer C0</center>                    
+                    </p>
+                    <p> After calculating the similarity percentages, customers will be sorted in descending order. Based on the Count and MinPercentage parameters, the customer list will be filtered.</p>
+                    <p> {"Customers": [{"distances": 0, "percentage": 100, "id": C0}, {"distances": 2.5, "percentage": 97, "id": C5}, {"distances": 8, "percentage": 92, "id": C6}, {"distances": 27, "percentage": 73, "id": C3}, "MinDistance": 0, "MaxDistance": 102} </p>
+                    <h4> 1.3.2. Recommended Products</h4>
+                    <p> The idea behind the recommendation of products and the impact of parameters are described in the desctiption of recommendProducts and recommendProducts2 functions. We will not re-explain these in this file.</p>
+                    <p> Assume given the recommenderType and productCount, we have the following recommended product lists for customers C0, C5, C6 and C3 (these customers are the most similar ones to customer C0, found at the end of section 1.3.1).</p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> CustomerIndex </td><td> Product List </td></tr>
+                        <tr><td> 0  </td><td> (10, 20, 30, 40, 50) </td></tr>
+                        <tr><td> 5  </td><td> (20, 60, 70, 30, 50) </td></tr>
+                        <tr><td> 6  </td><td> (70, 80, 90, 20, 50) </td></tr>
+                        <tr><td> 3  </td><td> (30, 60, 100, 110, 10) </td></tr>
+                        </table>Figure 1.7. Recommended products of customers</center>                    
+                    </p>
+                    <p> The main idea behind recommending products to similar customers is finding most commonly recommended items and sorting them. In Figure 1.8, we showed the number of occurences of products in product lists.</p>
+                    <p> 
+                        <center><table border="1" width=200> 
+                        <tr><td> Product </td><td> Count  </td></tr>
+                        <tr><td> 10  </td><td> 2 </td></tr>
+                        <tr><td> 20  </td><td> 3 </td></tr>
+                        <tr><td> 30  </td><td> 3 </td></tr>
+                        <tr><td> 40  </td><td> 1 </td></tr>
+                        <tr><td> 50  </td><td> 3 </td></tr>
+                        <tr><td> 60  </td><td> 2 </td></tr>
+                        <tr><td> 70  </td><td> 2 </td></tr>
+                        <tr><td> 80  </td><td> 1 </td></tr>
+                        <tr><td> 90  </td><td> 1 </td></tr>
+                        <tr><td> 100  </td><td> 1 </td></tr>
+                        <tr><td> 110  </td><td> 1 </td></tr>
+                        </table>Figure 1.8. Product occurences in product lists</center>                    
+                    </p>
+                    <p> The percentage of products are calculated by the following formula: </p>
+                    <p> <center>percentage(P) = 100 * Count(P) / NumberOfCustomers</center></p>
+                    <p> NumberOfCustomers represents how many customers are used to determine the recommended products list. In our case, NumberOfCustomers=4 (C0, C5, C6, C3). The percentages of products are: </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Product </td><td> Count  </td><td> Percentage  </td></tr>
+                        <tr><td> 10  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 20  </td><td> 3 </td><td> 75 </td></tr>
+                        <tr><td> 30  </td><td> 3 </td><td> 75 </td></tr>
+                        <tr><td> 40  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 50  </td><td> 3 </td><td> 75 </td></tr>
+                        <tr><td> 60  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 70  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 80  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 90  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 100  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 110  </td><td> 1 </td><td> 25 </td></tr>
+                        </table>Figure 1.9. Product occurences and percentages in product lists</center>                    
+                    </p>
+                    <p> The result of this part of similarCustomers function is:</p>
+                    <p> "Products": [{"id": 20, "percentage": 75}, {"id": 30, "percentage": 75}, {"id": 50, "percentage": 75}, {"id": 10, "percentage": 50}, {"id": 60, "percentage": 50}, {"id": 70, "percentage": 50}, {"id": 40, "percentage": 25}, {"id": 80, "percentage": 25}, {"id": 90, "percentage": 25}, {"id": 100, "percentage": 25}, {"id": 110, "percentage": 25}] } </p>
+                    <h3> 1.4. Axis, Slots and Type Parameters</h3>
+                    <p> Axis, Slots and Type parameters' functionalities are same as the customerSalesMap function. The detailed explanations can be found in customerSalesMap function.</p>
+                    <h3> 1.5. Search Type and Profile Id </h3>
+                    <p> Search type parameter can have two different values:</p>
+                    <p> 
+                        <center><table border="1" width=400> 
+                        <tr><td> Search Type </td><td> Definition  </td></tr>
+                        <tr><td> 0  </td><td> Use all customers </td></tr>
+                        <tr><td> 1  </td><td> Use only the customers in profile </td></tr>
+                        </table>Figure 1.10. searchType Types</center>                    
+                    </p>
+                    <p> In above examples, we calculated distances of all customers, therefore we set searchType to 0.</p>
+                    <p> However, if we want to find similar customers within a specific customer profile, searchType parameter value must be 1. Also note that, the given customer profile (specified by ProfileId parameter) must be created beforehand (by using customersOfProfile function). Otherwise, the function cannot find the customer list of given profile.</p>
+                    <h3> 1.6. Distance Type </h3>
+                    <p> There are many different ways to find difference of customer behaviours. In the current implementation of Tornado Server, we support four different distance metrics:</p>
+                    <p> 
+                        <center><table border="1" width=800> 
+                        <tr><td> Distance Type </td><td> Definition  </td><td> Formula  </td></tr>
+                        <tr><td> 0  </td><td> Kullback-Leibler (KL) Divergence </td><td> KL(P,Q) = P * log(P/Q) - P + Q </td></tr>
+                        <tr><td> 1  </td><td> Itakura-Saito (IS) Distance </td><td> IS(P,Q) = (P/Q) * log(P/Q) - 1 </td></tr>
+                        <tr><td> 2  </td><td> Hellinger Distance</td><td> H(P,Q) = (1/sqrt(2)) * sqrt( (sqrt(P) - sqrt(Q)) *(sqrt(P) - sqrt(Q)) )</td></tr>
+                        <tr><td> 3  </td><td> Euclidean Distance </td><td> EUC(P,Q) = (1/2) * (P-Q) * (P-Q)</td></tr>
+                        </table>Figure 1.11. Distance Types</center>                    
+                    </p>
+                    <p> Different distance types generate different results and similarity percentages. </p>
+                    <h3> 1.7. Count and MinPercentage </h3>
+                    <p> Count and MinPercentage parameters filters the customer lists found at the end of section 1.3.1.</p>
+                    <p> The limitation of similar customer list has impact on the recommended products list. </p>
+                    <h3> 1.8. Recommender Type </h3>
+                    <p> The values that recommenderType paramater can take and their funtionalities are described in recommmendProducts and recommendProducts2 function descriptions. </p>
+                    <p> 1.9. Product Count and Base Count </p>
+                    <p> Product count parameter represents how many products from each customer's recommendation list will be used for generating a product list for similar customers. </p>
+                    <p> Base count parameter specifies how many customers' recommendation lists will be used to define the overall recommendation list. </p>
+                    <p>Depending on productCount and baseCount values, the recommended item list and the percentage of items change. </p>
+                    <p> Recall the recommendations lists of customers illustrated in above sections (also shown in Figure 1.12). Below, we show the impact of productCount and baseCount values on recommended product list. The order of recommended products and the range of product percentages change with the parameters. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> CustomerIndex </td><td> Product List </td></tr>
+                        <tr><td> 0  </td><td> (10, 20, 30, 40, 50) </td></tr>
+                        <tr><td> 5  </td><td> (20, 60, 70, 30, 50) </td></tr>
+                        <tr><td> 6  </td><td> (70, 80, 90, 20, 50) </td></tr>
+                        <tr><td> 3  </td><td> (30, 60, 100, 110, 10) </td></tr>
+                        </table>Figure 1.12. Recommended products of customers</center>                    
+                    </p>
+                    <p><strong>If baseCount = 2 and productCount = 3 </strong></p>
+                    <p> The overall recommendation list will be generated based on customers C0 and C5. We will look only the first three products of product lists. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Product </td><td> Count  </td><td> Percentage  </td></tr>
+                        <tr><td> 20  </td><td> 2 </td><td> 100 </td></tr>
+                        <tr><td> 10  </td><td> 1 </td><td> 50 </td></tr>
+                        <tr><td> 30  </td><td> 1 </td><td> 50 </td></tr>
+                        <tr><td> 60  </td><td> 1 </td><td> 50 </td></tr>
+                        <tr><td> 70  </td><td> 1 </td><td> 50 </td></tr>
+                        </table>Figure 1.13. Product occurences and percentages when basecount=2 and productCount=3</center>                    
+                    </p>
+                    <p><strong> If baseCount = 2 and productCount = 5</strong></p>
+                    <p> The overall recommendation list will be generated based on customers C0 and C5.</p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Product </td><td> Count  </td><td> Percentage  </td></tr>
+                        <tr><td> 20  </td><td> 2 </td><td> 100 </td></tr>
+                        <tr><td> 30  </td><td> 2 </td><td> 100 </td></tr>
+                        <tr><td> 50  </td><td> 2 </td><td> 100 </td></tr>
+                        <tr><td> 10  </td><td> 1 </td><td> 50 </td></tr>
+                        <tr><td> 40  </td><td> 1 </td><td> 50 </td></tr>
+                        <tr><td> 60  </td><td> 1 </td><td> 50 </td></tr>
+                        <tr><td> 70  </td><td> 1 </td><td> 50 </td></tr>
+                        </table>Figure 1.14. Product occurences and percentages when basecount=2 and productCount=5</center>                    
+                    </p>
+                    <p><strong> If baseCount = 4 and productCount = 3</strong></p>
+                    <p> The overall recommendation list will be generated based on customers C0, C5, C6 and C3. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Product </td><td> Count  </td><td> Percentage  </td></tr>
+                        <tr><td> 20  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 30  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 60  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 70  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 10  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 80  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 90  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 100  </td><td> 1 </td><td> 25 </td></tr>
+                        </table>Figure 1.15. Product occurences and percentages when basecount=4 and productCount=3</center>                    
+                    </p>
+                    <p><strong> If baseCount = 4 and productCount = 5</strong></p>
+                    <p> The overall recommendation list will be generated based on customers C0, C5, C6 and C3. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Product </td><td> Count  </td><td> Percentage  </td></tr>
+                        <tr><td> 20  </td><td> 3 </td><td> 75 </td></tr>
+                        <tr><td> 30  </td><td> 3 </td><td> 75 </td></tr>
+                        <tr><td> 50  </td><td> 3 </td><td> 75 </td></tr>
+                        <tr><td> 10  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 60  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 70  </td><td> 2 </td><td> 50 </td></tr>
+                        <tr><td> 40  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 80  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 90  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 100  </td><td> 1 </td><td> 25 </td></tr>
+                        <tr><td> 110  </td><td> 1 </td><td> 25 </td></tr>
+                        </table>Figure 1.16. Product occurences and percentages when basecount=4 and productCount=5</center>                    
+                    </p>
+                    <h3> 1.10. Implementational Details </h3>
+                    <h4> 1.10.1. Function Hierarchy </h4>
+                    <p> TornadoServer.py file contains main server codes. When a request is sent to the server, it calls the corresponding class. In our case, the class is named as similarCustomers.</p>
+                    <p> First, the class will check the base cases. The base cases in our current implementation are:</p>
+                    <ul>
+                      <li>Checking customer validity</li>
+                      <li>Checking number of customers</li>
+                      <li>Checking minimum percentage</li>
+                      <li>Checking type</li>
+                      <li>Checking axis values</li>
+                      <li>Checking search type and distance type</li>
+                    </ul>
+                    <p> If there is no problem with base cases, the getSimilarCustomersWithProducts function from SimilarityFunctions.py file will be called depending on the request.</p>
+                    <p> <strong>getSimilarCustomersWithProducts</strong></p>
+                    <p> This function calls two functions consecutively (getSimilarCustomers and getGroupRecommendations). These functions will perform actions defined in sections 1.3.1 and 1.3.2 respectively.</p>
+                    <p> Distance related functions can be found at DistanceFunctions.py file.</p>
+                    <h4> 1.10.2. Database </h4>
+                    <p> In order to perform faster calculations, we generated some matrices beforehand (which are also in the database folder, with the .mat extentions). </p>
+                    <p> We generated matrix views of original sales tensor of customers.</p>
+                    <ul>
+                      <li>MarginalSalesTensor_CustomerWeekDow.mat</li>
+                      This file contains (CustomerIndex, WeekIndex, DowIndex) representation of SalesTensor table.
+                      <li>MarginalSalesTensor_CustomerWeekHour.mat</li>
+                      This file contains (CustomerIndex, WeekIndex, HourIndex) representation of SalesTensor table.
+                      <li>MarginalSalesTensor_CustomerWeekItemG3.mat</li>
+                      This file contains (CustomerIndex, WeekIndex, ItemG3Index) representation of SalesTensor table.
+                      <li>MarginalSalesTensor_CustomerDowHour.mat</li>
+                      This file contains (CustomerIndex, DowIndex, HourIndex) representation of SalesTensor table.
+                      <li>MarginalSalesTensor_CustomerDowItemG3.mat</li>
+                      This file contains (CustomerIndex, DowIndex, ItemG3Index) representation of SalesTensor table.
+                      <li>MarginalSalesTensor_CustomerHourItemG3.mat</li>
+                      This file contains (CustomerIndex, HourIndex, ItemG3Index) representation of SalesTensor table.
+                    </ul>
+                    <p> Before comparing the distance between two customers, we need to fetch their sales data from the database. Accesing to database for each customer one by one, getting sales data by "Group By" sql statement take long time. In order to speed up the process, we generated above views beforehand and stored them in the database folder.</p>
+                    <p> If the user gives xAxis=0 and yAxis=2, the similar customers function will use the data inside MarginalSalesTensor_CustomerWeekHour.mat file. If the user gives xAxis=3 and yAxis=1, the similar customers function will use the data inside MarginalSalesTensor_CustomerDowItemG3.mat file.</p>
+                    <p> If both xAxis and yAxis values are the same (i.e. xAxis = yAxis = 1), MarginalSalesTensor_CustomerDowHour.mat file will be used. After fetching the sales records based on (DowIndex, HourIndex), the dimensionality will be reduced to (HourIndex) to get sales histograms.</p>
+                    <p>Also note that if the SalesTensor table of the database changes, these views should be re-generated. In the "SistemiGuncelle" part of the "Kurulum" section, we mentioned a Python script named OfflineFunctionsForUpdate.py . This script also contains functions which update each .mat file. </p>
+                    <p> We also implemented the system without using these .mat files. Only using SalesTensor table to calculate distance between customers took the longest time. When we generated marginal view tables (not as separate .mat files but as different tables in the database), the process became slightly faster but not fast enough. Therefore, we generated addittional files to speed up the similarCustomers function.</p>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+    </div>
+    <!-- /.container -->
+
+    
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+</body>
+
+</html>

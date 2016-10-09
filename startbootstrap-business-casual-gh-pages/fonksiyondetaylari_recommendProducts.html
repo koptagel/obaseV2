@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Obase Tornado Server</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/business-casual.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="logo1"><img src="../otherFiles/bounLogo.png" width="110px" height="100px"> </div>
+    <div class="brand">Tornado Server</div>
+    <div class="address-bar">Bogazici Universitesi</div>
+    <div class="logo2"> <img src="../otherFiles/obaseLogo.png" width="300px" height="100px"> </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Business Casual</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">Fonksiyonlar</a>
+                    </li>
+                    <li>
+                        <a href="fonksiyondetaylari.html">Aciklamalar</a>
+                    </li>
+                    <li>
+                        <a href="kurulum.html">Kurulum</a>
+                    </li>
+                    <li>
+                        <a href="koddosyalari.html">Kod Dosyalari</a>
+                    </li>
+                    <li>
+                        <a href="guncellemeler.html">Son Guncellemeler</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Business Casual</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a style="font-size: 15px;" href="fonksiyondetaylari_customerSalesMap.html">customerSalesMap</a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" href="fonksiyondetaylari_recommendProducts.html">recommendProducts</a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" href="fonksiyondetaylari_customersOfProfile.html">customersOfProfile</a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" href="fonksiyondetaylari_similarCustomers.html">similarCustomers</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+
+    
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">recommendProducts and recommendProducts2
+                    </h2>
+                    <hr>
+                    <h3> 1.1. Goal</h3>
+                    <p> Given customer id, recommendation type, criteria and product count, return a list of recommended items. </p>
+                    <h3> 1.2. Function Template</h3>
+                    <p> <strong>Input</strong></p>
+                    <p> localhost:8086/recommendProducts?jsonData={"id": 737293, "type": "mix", "Count":5, "criteria": 1} </p>
+                    <p> or </p>
+                    <p> localhost:8086/recommendProducts2?jsonData={"id": 737293, "type": "mix", "Count":5, "criteria": 1} </p>
+                    <p> <strong>Output</strong></p>
+                    <p> {"Products": [{"id": 597}, {"id": 454}, {"id": 457}, {"id": 553}, {"id": 636}]} </p>
+                    <p> or </p>
+                    <p> {"Products": [{"id": 32823}, {"id": 18110}, {"id": 18109}, {"id": 1808}, {"id": 18107}]} </p>
+                    <p> depending on which function is used. recommendProducts function uses level 3 hierarchy of products (UrunGrup3 information), recommendProducts2 function uses products. </p>
+                    <h3> 1.3. Logic</h3>
+                    <p> In the below sections, the explanations are made based on recommendProduct2 function. Everything is same in both functions except the information of products. recommendProducts function uses IdUrunGrup3 feature of products whereas recommendProducts2 function uses IdUrun information. </p>
+                    <p> We use a state-of-the-art method, Nonnegative Matrix Factorization (NMF) method to find recommended items. A matrix can be considered as a 2-dimensional array. </p>
+                    <p> In our case, we use SalesMatrix whose rows represent all customers and columns represent all products. Each entry in the matrix represents how much money a customer spent for a product. </p>
+                    <p> In Figure 1.1, we demonstrated a small, synthetically generated sales matrix. In this case, there are four customers (C0, C1, C2 and C3) and five products (P0, P1, P2, P3, P4) in the database. According to this matrix; customer C0 bought product P0 and paid 1TL, bought product P1 and paid 2.5 TL, did not buy products P2 and P3 etc. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Customers </td><td> P0 </td><td> P1 </td><td> P2 </td><td> P3 </td><td> P4 </td></tr>
+                        <tr><td> C0  </td><td> 1 </td><td> 2.5 </td><td> 0 </td><td> 0 </td><td> 0.5 </td></tr>
+                        <tr><td> C1  </td><td> 0 </td><td> 1 </td><td> 0.5 </td><td> 1 </td><td> 0.5 </td></tr>
+                        <tr><td> C2  </td><td> 1 </td><td> 2 </td><td> 0 </td><td> 1 </td><td> 1 </td></tr>
+                        <tr><td> C3  </td><td> 0 </td><td> 0.5 </td><td> 0 </td><td> 0.3 </td><td> 0 </td></tr>
+                        </table>Figure 1.1. Sales Matrix</center>                    
+                    </p>
+                    <p> Given a rank (r, which is smaller than the number of products), NMF decomposes original matrix into two smaller sized matrices. The problem can be represented as: </p>
+                    <p><center>  X ~ W H </center> </p>
+                    <p> where X matrix's dimensions are (NC x NP), W matrix's dimensions are (NC x r), H matrix's dimensions are (r x NP), NC is the number of customers, NP is the number of products and r is the rank value. </p>
+                    <p> If we apply NMF for the sales matrix in Figure 1 by using rank=2, we might get the following two matrices (W and H): </p>
+                    <p> 
+                        <center><table border="1" width=200> 
+                        <tr><td> Customers </td><td>  </td><td>  </td></tr>
+                        <tr><td> C0  </td><td> 1 </td><td> 0 </td></tr>
+                        <tr><td> C1  </td><td> 0.5 </td><td> 0.5 </td></tr>
+                        <tr><td> C2  </td><td> 1 </td><td> 1 </td></tr>
+                        <tr><td> C3  </td><td> 0 </td><td> 0.3 </td></tr>
+                        </table>Figure 1.2. W Matrix</center>                    
+                    </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td>  </td><td> P0 </td><td> P1 </td><td> P2 </td><td> P3 </td><td> P4 </td></tr>
+                        <tr><td>  </td><td> 0.1 </td><td> 2 </td><td> 0.5 </td><td> 0 </td><td> 1 </td></tr>
+                        <tr><td>  </td><td> 0.5 </td><td> 1 </td><td> 0.5 </td><td> 1 </td><td> 0.3 </td></tr>
+                        </table>Figure 1.3. H Matrix</center>                    
+                    </p>
+                    <p> After generating W and H matrices, we multiply these matrices to get an estimation of the original sales matrix. We called this matrix as SalesMatrixEst, which also has the dimensions (NC x NP). </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Customers </td><td> P0 </td><td> P1 </td><td> P2 </td><td> P3 </td><td> P4 </td></tr>
+                        <tr><td> C0  </td><td> 0.1 </td><td> 2 </td><td> 0.5 </td><td> 0 </td><td> 1 </td></tr>
+                        <tr><td> C1  </td><td> 0.3 </td><td> 1.5 </td><td> 0.5 </td><td> 0.5 </td><td> 0.65 </td></tr>
+                        <tr><td> C2  </td><td> 0.6 </td><td> 3 </td><td> 1 </td><td> 1 </td><td> 1.3 </td></tr>
+                        <tr><td> C3  </td><td> 0.15 </td><td> 0.3 </td><td> 0.15 </td><td> 0.3 </td><td> 0.09 </td></tr>
+                        </table>Figure 1.4. Sales Matrix Estimation</center>                    
+                    </p>
+                    <p> In recommendProducts and recommendProducts2 functions, we compare SalesMatrix and SalesMatrixEst for a given customer and return the result. </p>
+                    <p> If we analyze the original sales and the sales estimation of customer C0, we have the below chart. Blue bars represent real sales of the customer and red bars represent the sales estimations. X axis corresponds to products and Y axis correspond to the money. </p>
+                    <p> <center> <img src="../otherFiles/Section1_C0.png"> </center> </p>
+                    <p><center> Figure 1.5. SalesMatrix and SalesMatrixEst comparison for customer C0 </center></p>
+                    <p> We have the following figure for customer C1: </p>
+                    <p> <center> <img src="../otherFiles/Section1_C1.png"> </center> </p>
+                    <p><center> Figure 1.6. SalesMatrix and SalesMatrixEst comparison for customer C1 </center></p>
+                    <h3> 1.4. Recommender Types</h3>
+                    <p> After generating the SalesMatrixEst matrix, given a customer and recommender type, we need to return a list of recommended items. </p>
+                    <p> There are four different recommender types implemented in the current version of the system: </p>
+                    <p> 
+                        <center><table border="1" width=800> 
+                        <tr><td> Recommender Type </td><td> Description </td></tr>
+                        <tr><td> mix  </td><td>   Returns products without any specific filtering </td></tr>
+                        <tr><td> discover  </td><td>  Returns only the products the customer did not purchase yet </td></tr>
+                        <tr><td> habit  </td><td>   Returns only the products the customer already purchased </td></tr>
+                        <tr><td> difference  </td><td> Returns the products whose estimated sales values are bigger than the original sales values </td></tr>
+                        </table>Figure 1.7. Recommender Types</center>                    
+                    </p>
+                    <p> Lets compare the results of each recommender type, when the given customer is C0 (whose original sales and sales estimations are shown in below chart). </p>
+                    <p> <center> <img src="../otherFiles/Section1_C0.png"> </center> </p>
+                    <p><center> Figure 1.8. SalesMatrix and SalesMatrixEst comparison for customer C0 </center></p>
+                    <p> <strong>mix</strong> </p>
+                    <p> When the recommender type is "mix", the function returns products (in sorted order) without any specific filtering. </p>
+                    <p> In the case of customer CO; the estimations of products (P0, P1, P2, P3, P4) are (0.1, 2, 0.5, 0, 1) respectively. So, we sort the products according to the values in descending order. The recommended products are : </p>
+                    <p> <center>(P1, P4, P2, P0, P3) </center> </p>
+                    <p> <strong>discover</strong> </p>
+                    <p> When the recommender type is "discover", the function returns only the products (in sorted order) the customer did not purchase yet. </p>
+                    <p> In the case of customer CO, we have the following recommended products: </p>
+                    <p> <center>(P2, P3) </center> </p>
+                    <p> <strong>habit</strong> </p>
+                    <p> When the recommender type is "habit", the function returns only the products (in sorted order) the customer already purchased. </p>
+                    <p> In the case of customer CO, we have the following recommended products: </p>
+                    <p> <center>(P1, P4, P0) </center> </p>
+                    <p> <strong>difference</strong> </p>
+                    <p> When the recommender type is "difference", the function returns the products (in sorted order) whose estimated sales values are bigger than the original sales values. </p>
+                    <p> In the case of customer CO, we have the following recommended products: </p>
+                    <p> <center>(P4, P2) </center> </p>
+                    <p> Overall, for customer C0, we have the following recommended products table for each recommender type: </p>
+                    <p> 
+                        <center><table border="1" width=400> 
+                        <tr><td> Recommender Type </td><td> Product Recommendations </td></tr>
+                        <tr><td> mix  </td><td>  (P1, P4, P2, P0, P3) </td></tr>
+                        <tr><td> discover  </td><td>  (P2, P3)</td></tr>
+                        <tr><td> habit  </td><td>  (P1, P4, P0) </td></tr>
+                        <tr><td> difference  </td><td>(P4, P2) </td></tr>
+                        </table>Figure 1.9. Recommended products for customer C0</center>                    
+                    </p>
+                    <h3> 1.5. Criteria</h3>
+                    <p> Criteria parameter defines how the original sales matrix will used during recommendation of the products. </p>
+                    <p> Criteria may have the following values: </p>
+                    <p> 
+                        <center><table border="1" width=500> 
+                        <tr><td> Criteria </td><td> Description </td></tr>
+                        <tr><td> 1 </td><td> Total Sales Amount </td></tr>
+                        <tr><td> 2 </td><td> Whether a sale is done or not (0 or 1. Binary representation) </td></tr>
+                        </table>Figure 1.10. Criteria Types</center>                    
+                    </p>
+                    <p> When the criteria is "1", the sales matrix will be used as it is (each entry in the matrix corresponds to the amount of money a customer spent to a product, as demonstrated in section 1.3 of this file). Therefore, the recommendations done by this criteria will describe how much money we expect a customer will spend to a product. </p>
+                    <p> When the criteria is "2", the sales matrix will converted to a binary representation which shows whether a customer bought a product or not, regardless of how much money he/she spent. The binary representation of original sales tensor is shown below. The recommendations done by this criteria will illustrate whether we expect a customer will buy a product or not. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Customers </td><td> P0 </td><td> P1 </td><td> P2 </td><td> P3 </td><td> P4 </td></tr>
+                        <tr><td> C0  </td><td> 1 </td><td> 1 </td><td> 0 </td><td> 0 </td><td> 1 </td></tr>
+                        <tr><td> C1  </td><td> 0 </td><td> 1 </td><td> 1 </td><td> 1 </td><td> 1 </td></tr>
+                        <tr><td> C2  </td><td> 1 </td><td> 1 </td><td> 0 </td><td> 1 </td><td> 1 </td></tr>
+                        <tr><td> C3  </td><td> 0 </td><td> 1 </td><td> 0 </td><td> 1 </td><td> 0 </td></tr>
+                        </table>Figure 1.11. Binary Representation of Sales Matrix</center>                    
+                    </p>
+                    <p> The results of both criteria may differ dramatically. Intiutively, we can say all products purchased by a customer has similar importance when criteria=2. However, when criteria=1, the amount of money spent on a product has importance. </p>
+                    <h3> 1.6. Count</h3>
+                    <p> The count parameter of the function determines how many products will be recommended. </p>
+                    <p> After sorting the items according to the recommender type, we return first N products as the recommendation list. </p>
+                    <h3> 1.7. Implementational Details</h3>
+                    <h4> 1.7.1. Function Hierarchy</h4>
+                    <p> TornadoServer.py file contains main server codes. When a request is sent to the server, it calls the corresponding class. In our case, the classes are named as RecommendProducts and RecommendProducts2. </p>
+                    <p> First, the class will check the base cases. The base cases in our current implementation are: </p>
+                    <ul>
+                      <li>Checking customer validity</li>
+                      <li>Checking recommender types</li>
+                      <li>Checking criteria</li>
+                      <li>Checking count</li>
+                    </ul>
+                    <p> If there is no problem with base cases, the getRecommendationG3OfCustomer or getRecommendationOfCustomer function from RecommendationFunctions.py file will be called depending on the request. </p>
+                    <p> <strong>getRecommendationG3OfCustomer</strong> </p>
+                    <p> Returns the list of recommended products based on their product level 3 hierarchy (IdUrunGrup3). </p>
+                    <p> <strong>getRecommendationOfCustomer</strong> </p>
+                    <p> Returns the list of recommended products based on their products. </p>
+                    <h4> 1.7.2. Database</h4>
+                    <p> The original sales will be fetched from SalesTensor table in the database. Instead of fetching all records for all customers, we only fetch the corresponding records of that customer. Each sale entry is represented as </p>
+                    <p> <center> (WeekIndex, DowIndex, HourIndex, ItemIndex, ItemG3Index, CustomerIndex, Amount)</center>  </p>
+                    <p> in SalesTensor table. In order to get the sales histogram of a customer, we need to group entries based on ItemIndex or ItemG3Index. A set of example sales records for customer C0 might be as follows: </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> WeekIndex </td><td> DowIndex </td><td> HourIndex </td><td> ItemIndex </td><td> ItemG3Index </td><td> CustomerIndex </td><td> Amount </td></tr>
+                        <tr><td> 0  </td><td> 1 </td><td> 12 </td><td> 0 </td><td> 150 </td><td> 0 </td><td> 0.2 </td></tr>
+                        <tr><td> 0  </td><td> 1 </td><td> 12 </td><td> 4 </td><td> 90 </td><td> 0 </td><td> 0.5 </td></tr>
+                        <tr><td> 1  </td><td> 2 </td><td> 8 </td><td> 0 </td><td> 150 </td><td> 0 </td><td> 0.8 </td></tr>
+                        <tr><td> 1  </td><td> 2 </td><td> 8 </td><td> 1 </td><td> 81 </td><td> 0 </td><td> 2.5 </td></tr>
+                        </table>Figure 1.12. Sales of customer C0 in SalesTensor table</center>                    
+                    </p>
+                    <p> When we sum all sales done by customer C0 based on ItemIndex values, we have the following sales histogram: </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Customers </td><td> P0 </td><td> P1 </td><td> P2 </td><td> P3 </td><td> P4 </td></tr>
+                        <tr><td> C0  </td><td> 1 </td><td> 2.5 </td><td> 0 </td><td> 0 </td><td> 0.5 </td></tr>
+                        </table>Figure 1.13. Sales of customer C0</center>                    
+                    </p>
+                    <p> which is the corresponding row of the SalesMatrix. </p>
+                    <p> Since we are not making online computations on the server (we pre-calculated the sales estimations tables when setting the system), the NMF operations are already done and stored the results in corresponding tables (SalesEstimation_1, SalesEstimation_2, SalesEstimationG3_1, SalesEstimationG3_2) in the database in the form of: </p>
+                    <p><center> (CustomerIndex, ItemIndex, Amount) </center></p>
+                    <p> or </p>
+                    <p><center> (CustomerIndex, ItemG3Index, Amount) </center></p>
+                    <p> SalesEstimation_1 table contains estimations when criteria=1 and ItemIndex information is used. SalesEstimation_2 table contains estimations when criteria=2 and ItemIndex information is used. SalesEstimationG3_1 table contains estimations when criteria=1 and ItemG3Index information is used. SalesEstimationG3_1 table contains estimations when criteria=2 and ItemG3Index information is used. </p>
+                    <p> recommendProducts function uses SalesEstimationG3_1 and SalesEstimationG3_2 tables. </p>
+                    <p> recommendProducts2 function uses SalesEstimation_1 and SalesEstimation_2 tables. </p>
+                    <p> After getting original sales and estimated sales from corresponding tables in the dataset, the functions sort products based on their values, apply filtering based on the recommender type and returns first N products as the recommended item list. </p>
+                    <p> <strong>Updating Database</strong>  </p>
+                    <p> As mentioned in "Sistemi Guncelleme" section of this website, if a table (CustomerMapping, ItemMapping or SalesTensor) is modified (i.e new sales records are added), sales estimation tables must be re-calculated. </p>
+                    <p> The script in that section will re-compute the sales estimations and update the corresponding tables. </p>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+    </div>
+    <!-- /.container -->
+
+    
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+</body>
+
+</html>
