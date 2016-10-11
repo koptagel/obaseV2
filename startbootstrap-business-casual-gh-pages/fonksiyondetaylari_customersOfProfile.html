@@ -121,7 +121,143 @@
                     <h2 class="intro-text text-center">customersOfProfile
                     </h2>
                     <hr>
-                    <p></p>
+                    <h3> 1.1. Goal</h3>
+                    <p> Given a product list and some criteria, return a list of customers which represents a customer profile based on the products.</p>
+                    <h3> 1.2. Function Template</h3>
+                    <p> <strong>Input</strong></p>
+                    <p> localhost:8086/customersOfProfile?jsonData={"Count":5, "MinPercentage":60, "Type": 2, "ProfileId": 123, "ProfileDs": "Bebek", "Products": [{"id": 9556}, {"id": 34398}, {"id": 5974}]}</p>
+                    <p> <strong>Output</strong></p>
+                    <p> {"Customers": [{"percentage":98, "id": 90361}, {"percentage":80, "id": 90412}, {"percentage":77, "id": 1073258}]} </p>
+                    <h3> 1.3. Logic</h3>
+                    <p> In customersOfProfile function, we will use the sales matrix of customers (whose detailed explanation can be found on the description of recommendProducts function). Sales matrix is two-dimensional representation of the sales records whose rows represent customers and columns represent products. For this function, we use level 3 hierarchy of products (IdUrunGrup3 information). Each data point on sales matrix reflects how much money a customer spent for a product group. </p>
+                    <p> An example sales matrix is shown in Figure 1.1. The shape of sales matrix is (NC x NP) where NC is number of customers and NP is number of products. In this case, NC=6 and NP=4. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Customers </td><td> P0 </td><td> P1 </td><td> P2 </td><td> P3 </td></tr>
+                        <tr><td> C0  </td><td> 3 </td><td> 2 </td><td> 0 </td><td> 1 </td></tr>
+                        <tr><td> C1  </td><td> 1 </td><td> 1 </td><td> 5 </td><td> 0 </td></tr>
+                        <tr><td> C2  </td><td> 4 </td><td> 0 </td><td> 3 </td><td> 2 </td></tr>
+                        <tr><td> C3  </td><td> 2 </td><td> 1 </td><td> 0 </td><td> 1 </td></tr>
+                        <tr><td> C4  </td><td> 1 </td><td> 0 </td><td> 2 </td><td> 2 </td></tr>
+                        <tr><td> C5  </td><td> 0 </td><td> 0 </td><td> 3 </td><td> 0 </td></tr>
+                        </table>Figure 1.1. Sales Matrix</center>                    
+                    </p>
+                    <p> The aim of customersOfProfile function is to find customers who are better explained by the given product list. We are trying to find which customers more fit to the given product list. </p>
+                    <p> For this purpose, we are using a variation of Nonnegative Matrix Factorization (NMF) model. </p>
+                    <p> Given a rank (r, which is smaller than the number of products), NMF decomposes original matrix into two smaller sized matrices. The problem can be represented as: </p>
+                    <p><center>  X ~ W H </center> </p>
+                    <p> where X matrix's dimensions are (NC x NP), W matrix's dimensions are (NC x r), H matrix's dimensions are (r x NP), NC is the number of customers, NP is the number of products and r is the rank value. The goal of NMF is to generate W and H matrices whose product (WH) is very similar (almost the same) to the original X matrix. </p>
+                    <p> The algorithm of NMF works as follows: </p>
+                    <ul>
+                      <li>Step 0</li>
+                      W and H matrices are initially created with random values. 
+                      <li>Step 1</li>
+                      W matrix is kept fixed and the values of H matrix is changed in order to make WH matrix more similar to the original X matrix.
+                      <li>Step 2</li>
+                      Then, H matrix is kept fixed and W is modified for making WH closer to X. 
+                      <li>Step 3</li>
+                      Steps 1 and 2 are applied continueusly until some specific point (specific number of iterations etc). 
+                    </ul>
+                    <p> The resulting W and H matrices represent the behaviour of original matrix. </p>
+                    <p> In customersOfProfile function, we are using a variation of NMF model. Instead of randomly generating H matrix and updating it in every iteration, we are keeping it fixed. H matrix represents the characteristics of products (since its shape is (r x NP), each of its column represents a product in a different way). </p>
+                    <ul>
+                      <li>Step 0</li>
+                      W matrix is initially created with random values. 
+                      H matrix is created based on given products.
+                      <li>Step 1</li>
+                      H matrix is kept fixed and W is modified for making WH closer to X.
+                      <li>Step 2</li>
+                      Step 1 is applied continueusly until some specific point (specific number of iterations etc). 
+                    </ul>
+                    <p> For this function, we set rank r=1. Assume products P1 and P3 are given to represent a customer profile. The H matrix is generated by assigning 1 to the given products and setting 0 to other products (as shown in Figure 1.2) whose shape is (1 x 4). </p>
+                    <p> 
+                        <center><table border="1" width=200> 
+                        <tr><td> P0 </td><td> P1 </td><td> P2 </td><td> P3 </td></tr>
+                        <tr><td> 0 </td><td> 1 </td><td> 0 </td><td> 1 </td></tr>
+                        </table>Figure 1.2. H Matrix</center>                    
+                    </p>            
+                    <p> After generating H matrix, W matrix's entries are updated for several iterations. An example W matrix is shown in Figure 1.3.</p>
+                    <p> 
+                        <center><table border="1" width=100> 
+                        <tr><td> Customers </td><td>  </td></tr>
+                        <tr><td> C0  </td><td> 2 </td></tr>
+                        <tr><td> C1  </td><td> 0 </td></tr>
+                        <tr><td> C2  </td><td> 2 </td></tr>
+                        <tr><td> C3  </td><td> 3 </td></tr>
+                        <tr><td> C4  </td><td> 1 </td></tr>
+                        <tr><td> C5  </td><td> 2 </td></tr>
+                        </table>Figure 1.3. W Matrix</center>                    
+                    </p>
+                    <p> The multiplication of W and H matrices will be a similar representation of sales matrix based on columns P1 and P3. However, note that since we randomly initialize W matrix, and apply small number of iterations; the results also contain some customers who did not purchase any of given products but expected to buy these products. </p>
+                    <p> After generating W Matrix, we use the formula below to find the percentage value which represents the customer's belonging to the profile. W(C) corresponds to the value of customer C on W Matrix and maxValue corresponds to the maximum value of W Matrix. This formula will set the maximum value as 100% and assign other percentages with fixed ratio. In our simple example, maxValue=3. </p>
+                    <p> <center>percentage(C) = 100 * W(C) / maxValue</center></p>
+                    <p> Customers' W Matrix values and the percentages are shown in Figure 1.4. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Customers </td><td> W Matrix Value </td><td> Percentage </td></tr>
+                        <tr><td> C0  </td><td> 2 </td><td> 66 </td></tr>
+                        <tr><td> C1  </td><td> 0 </td><td> 0 </td></tr>
+                        <tr><td> C2  </td><td> 2 </td><td> 66 </td></tr>
+                        <tr><td> C3  </td><td> 3 </td><td> 100 </td></tr>
+                        <tr><td> C4  </td><td> 1 </td><td> 33 </td></tr>
+                        <tr><td> C5  </td><td> 2 </td><td> 66 </td></tr>
+                        </table>Figure 1.4. W Matrix Values and Customer Percentages</center>                    
+                    </p>
+                    <p> The result of customersOfProfile function is the sorted version of above figure. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Customers </td><td> Percentage </td></tr>
+                        <tr><td> C3  </td><td> 100 </td></tr>
+                        <tr><td> C0  </td><td> 66 </td></tr>
+                        <tr><td> C2  </td><td> 66 </td></tr>
+                        <tr><td> C5  </td><td> 66 </td></tr>
+                        <tr><td> C4  </td><td> 33 </td></tr>
+                        <tr><td> C1  </td><td> 0 </td></tr>
+                        </table>Figure 1.5. Result of customersOfProfile</center>                    
+                    </p>
+                    <h3> 1.4. Count and MinPercentage</h3>
+                    <p> Count and MinPercentage parameters filters the customer list found at the end of Section 1.3. </p>
+                    <h3> 1.5. Type</h3>
+                    <p> Type parameter defines how the original sales matrix will used during recommendation of the products.</p>
+                    <p> Type may have the following values: </p>
+                    <p> 
+                        <center><table border="1" width=500> 
+                        <tr><td> Criteria </td><td> Description </td></tr>
+                        <tr><td> 1 </td><td> Total Sales Amount </td></tr>
+                        <tr><td> 2 </td><td> Whether a sale is done or not (0 or 1. Binary representation) </td></tr>
+                        </table>Figure 1.6. Type Types</center>                    
+                    </p>
+                    <p> When the criteria is "1", the sales matrix will be used as it is (each entry in the matrix corresponds to the amount of money a customer spent to a product, as demonstrated in section 1.3 of this file). When the criteria is "2", the sales matrix will converted to a binary representation which shows whether a customer bought a product or not, regardless of how much money he/she spent. The binary representation of original sales tensor is shown below. </p>
+                    <p> 
+                        <center><table border="1" width=300> 
+                        <tr><td> Customers </td><td> P0 </td><td> P1 </td><td> P2 </td><td> P3 </td></tr>
+                        <tr><td> C0  </td><td> 1 </td><td> 1 </td><td> 0 </td><td> 1 </td></tr>
+                        <tr><td> C1  </td><td> 1 </td><td> 1 </td><td> 1 </td><td> 0 </td></tr>
+                        <tr><td> C2  </td><td> 1 </td><td> 0 </td><td> 1 </td><td> 1 </td></tr>
+                        <tr><td> C3  </td><td> 1 </td><td> 1 </td><td> 0 </td><td> 1 </td></tr>
+                        <tr><td> C4  </td><td> 1 </td><td> 0 </td><td> 1 </td><td> 1 </td></tr>
+                        <tr><td> C5  </td><td> 0 </td><td> 0 </td><td> 1 </td><td> 0 </td></tr>
+                        </table>Figure 1.7. Binary Representation of Sales Matrix</center>                    
+                    </p>
+                    <p> The results of both types may differ dramatically. Intiutively, we can say all products purchased by a customer has similar importance when type=2. However, when type=1, the amount of money spent on a product has importance. </p>
+                    <h3> 1.6. ProfileId and ProfileDs </h3>
+                    <p> After generating the results (customer list and corresponding percentages, filtered by Count and MinPercentage parameters), two tables in the database will be updated. </p>
+                    <p> ProfileId and ProfileDs will be added (or overwritten if previously a customer profile with same id existed) to the ProfileMapping table. </p>
+                    <p> Customer list and the percentages of customers will be added (or overwritten if previously a customer profile with same id existed) to ProfileCustomers table. </p>
+                    <p> These tables and customer list will be used in similarCustomers function when the searchType parameter is set to 1. </p>
+                    <h3> 1.7. Implementational Details</h3>
+                    <h4> 1.7.1. Function Hierarchy </h4>
+                    <p> TornadoServer.py file contains main server codes. When a request is sent to the server, it calls the corresponding class. In our case, the class is named as CustomersOfProfile. </p>
+                    <p> First, the class will check the base cases. The base cases in our current implementation are: </p>
+                    <ul>
+                      <li>Checking number of customers</li>
+                      <li>Checking minimum percentage</li>
+                      <li>Checking type</li>
+                      <li>Checking product list</li>
+                    </ul>
+                    <p> If there is no problem with base cases, the generateCustomerProfile function from ProfileFunctions.py file will be called. </p>
+                    <p> <strong>generateCustomerProfile</strong> </p>
+                    <p> This function fetches the sales matrix, applies modified NMF (which can be foun on NmfFunctions.py file) and updates profile related tables in the database. </p>
                 </div>
             </div>
         </div>
